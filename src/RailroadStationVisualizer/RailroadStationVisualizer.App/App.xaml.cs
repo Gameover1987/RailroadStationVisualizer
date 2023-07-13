@@ -22,6 +22,7 @@ namespace RailroadStationVisualizer.App
             DelegateCommand.CommandException += CommandException;
             MainWindow.DataContext = serviceProvider.GetService<IMainViewModel>();
             MainWindow.Show();
+
         }
 
         private void MainWindowOnClosed(object sender, EventArgs e) {
