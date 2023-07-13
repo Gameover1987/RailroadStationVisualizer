@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RailroadStationVisualizer.App", "RailroadStationVisualizer.App\RailroadStationVisualizer.App.csproj", "{34120592-865B-4CA6-AF77-4AA50816915F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RailroadStationVisualizer.App", "RailroadStationVisualizer.App\RailroadStationVisualizer.App.csproj", "{34120592-865B-4CA6-AF77-4AA50816915F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RailroadStationVisualizer.UI", "RailroadStationVisualizer.UI\RailroadStationVisualizer.UI.csproj", "{A9C0951C-F05D-4F61-9367-24122032AC6E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RailroadStationVisualizer.UI", "RailroadStationVisualizer.UI\RailroadStationVisualizer.UI.csproj", "{A9C0951C-F05D-4F61-9367-24122032AC6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RailroadStationVisualizer.Model", "RailroadStationVisualizer.Model\RailroadStationVisualizer.Model.csproj", "{7C7E1CE4-4704-4F08-A2B9-28B4F9078CA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RailroadStationVisualizer.Model", "RailroadStationVisualizer.Model\RailroadStationVisualizer.Model.csproj", "{7C7E1CE4-4704-4F08-A2B9-28B4F9078CA5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RailroadStationVisualizer.Tests", "RailroadStationVisualizer.Tests\RailroadStationVisualizer.Tests.csproj", "{A2DDF84E-28D6-43EA-90D1-DC11BEF2B703}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RailroadStationVisualizer.Tests", "RailroadStationVisualizer.Tests\RailroadStationVisualizer.Tests.csproj", "{A2DDF84E-28D6-43EA-90D1-DC11BEF2B703}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{4677505E-CA0C-4298-99F6-43B220A4EFC1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +38,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A2DDF84E-28D6-43EA-90D1-DC11BEF2B703} = {4677505E-CA0C-4298-99F6-43B220A4EFC1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2CC525BF-F1E6-4CB5-B2C3-0B713337CE2A}
