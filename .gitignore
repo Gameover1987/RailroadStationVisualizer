@@ -1,2 +1,9 @@
 *.user
 /.vs
+src/RailroadStationVisualizer/.vs/
+src/RailroadStationVisualizer/RailroadStationVisualizer.App/bin/
+src/RailroadStationVisualizer/RailroadStationVisualizer.App/obj/
+src/RailroadStationVisualizer/RailroadStationVisualizer.Model/bin/
+src/RailroadStationVisualizer/RailroadStationVisualizer.Model/obj/
+src/RailroadStationVisualizer/RailroadStationVisualizer.UI/bin/
+src/RailroadStationVisualizer/RailroadStationVisualizer.UI/obj/
