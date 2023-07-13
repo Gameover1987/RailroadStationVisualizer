@@ -4,14 +4,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RailroadStationVisualizer.App"
+        xmlns:viewModels="clr-namespace:RailroadStationVisualizer.App.ViewModels"
+        xmlns:helpers="clr-namespace:RailroadStationVisualizer.UI.Helpers;assembly=RailroadStationVisualizer.UI"
+        xmlns:designMock="clr-namespace:RailroadStationVisualizer.App.Views.DesignMock"
         mc:Ignorable="d"
-        Title="Отображение схемы ЖД станции"
+        Title="{Binding Title}"
         MinHeight="450"
         Height="800"
         MinWidth="800"
         Width="1000"
         WindowStartupLocation="CenterScreen"
-        Background="{x:Static SystemColors.ControlBrush}">
+        Background="{x:Static SystemColors.ControlBrush}"
+        d:DataContext="{d:DesignInstance Type={x:Type designMock:DesignMockMainViewModel}, IsDesignTimeCreatable=True}">
     <Grid Margin="12">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -21,11 +25,42 @@
         <StackPanel Grid.Row="0" Orientation="Horizontal" Background="White" HorizontalAlignment="Left" >
             <StackPanel Orientation="Vertical" Margin="6">
                 <TextBlock Text="Парк"/>
-                <ComboBox Width="100" Margin="0,6,0,0"/>
+                <ComboBox Width="100" Height="28" Margin="0,6,0,0"
+                          ItemsSource="{Binding Parks}"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch"
+                          SelectedItem="{Binding SelectedPark}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type viewModels:ParkViewModel}">
+                            <TextBlock Text="{Binding Name}" Height="28" TextTrimming="CharacterEllipsis" Margin="0,3,0,0"
+                                       helpers:TextBlockToolTipHelper.ShowTooltipWhenTrimming="True"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
             </StackPanel>
             <StackPanel Orientation="Vertical" Margin="6">
                 <TextBlock Text="Цвет заливки"/>
-                <ComboBox Width="100" Margin="0,6,0,0"/>
+                <ComboBox Width="150" Height="28" Margin="0,6,0,0"
+                          ItemsSource="{Binding FillColors}"
+                          SelectedItem="{Binding SelectedColor}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Border Grid.Column="0" Width="12" Height="12"
+                                        Background="{Binding Color, Converter={StaticResource ColorToBrushConverter}}"/>
+
+                                <TextBlock Grid.Column="1" Text="{Binding Name}" Margin="3,0,0,0" VerticalAlignment="Center"
+                                           TextTrimming="CharacterEllipsis"
+                                           helpers:TextBlockToolTipHelper.ShowTooltipWhenTrimming="True"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
             </StackPanel>
         </StackPanel>
     </Grid>

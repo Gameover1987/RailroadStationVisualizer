@@ -1,6 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using RailroadStationVisualizer.App.Model;
 using RailroadStationVisualizer.App.ViewModels;
+using RailroadStationVisualizer.App.ViewModels.Colors;
 using RailroadStationVisualizer.App.Views;
 using RailroadStationVisualizer.UI.Commands;
 using System;
@@ -37,6 +38,7 @@ namespace RailroadStationVisualizer.App
             serviceCollection
                 .AddSingleton<IStationSchemaProvider, StationSchemaProvider>()
                 .AddSingleton<IViewModelFactory, ViewModelFactory>()
+                .AddSingleton<IFillColorsProvider, FillColorsProvider>()
                 .AddSingleton<IMainViewModel, MainViewModel>();
 
             return serviceCollection.BuildServiceProvider();
