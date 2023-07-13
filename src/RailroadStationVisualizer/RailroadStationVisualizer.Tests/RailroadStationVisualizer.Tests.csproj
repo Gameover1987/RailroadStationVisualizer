@@ -19,7 +19,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RailroadStationVisualizer.App\RailroadStationVisualizer.App.csproj" />
-    <ProjectReference Include="..\RailroadStationVisualizer.Model\RailroadStationVisualizer.Model.csproj" />
     <ProjectReference Include="..\RailroadStationVisualizer.UI\RailroadStationVisualizer.UI.csproj" />
   </ItemGroup>
 

@@ -2,10 +2,10 @@ using System.Collections.ObjectModel;
 
 namespace RailroadStationVisualizer.App.ViewModels
 {
-    public interface IParkViewModel
+    public interface IRailwayTrackViewModel
     {
         string Name { get; }
 
-        ObservableCollection<IRailwayTrackViewModel> Tracks { get; }
+        ObservableCollection<IRailwaySectionViewModel> Sections { get; }
     }
 }

@@ -1,6 +1,4 @@
-﻿using RailroadStationVisualizer.Model;
-
-namespace RailroadStationVisualizer.App.Model
+﻿namespace RailroadStationVisualizer.App.Model
 {
     public interface IStationSchemaProvider
     {

@@ -16,4 +16,17 @@
     <ProjectReference Include="..\RailroadStationVisualizer.UI\RailroadStationVisualizer.UI.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Views\Controls\RailroadStationVisualizerControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Views\Controls\RailroadStationVisualizerControl.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
 </Project>

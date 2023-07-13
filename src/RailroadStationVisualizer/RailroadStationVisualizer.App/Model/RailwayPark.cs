@@ -1,10 +1,14 @@
-namespace RailroadStationVisualizer.Model
+namespace RailroadStationVisualizer.App.Model
 {
     /// <summary>
-    /// ÆÄ ïàðê
+    /// Ð–Ð” Ð¿Ð°Ñ€Ðº
     /// </summary>
     public class RailwayPark
     {
+        public RailwayPark() {
+            Tracks = new RailwayTrack[0];
+        }
+
         public string Name { get; set; }
 
         public RailwayTrack[] Tracks { get; set; }

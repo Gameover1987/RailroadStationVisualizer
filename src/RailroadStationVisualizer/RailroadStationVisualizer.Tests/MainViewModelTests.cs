@@ -3,7 +3,6 @@ using NUnit.Framework;
 using RailroadStationVisualizer.App.Model;
 using RailroadStationVisualizer.App.ViewModels;
 using RailroadStationVisualizer.App.ViewModels.Colors;
-using RailroadStationVisualizer.Model;
 using RailroadStationVisualizer.Tests.Utils;
 using System.Linq;
 
@@ -39,7 +38,7 @@ namespace RailroadStationVisualizer.Tests
                 .Returns(GetStationSchema);
             GetMock<IViewModelFactory>()
                 .Setup(x => x.CreateParkViewModel(It.IsAny<RailwayPark>()))
-                .Returns(new ParkViewModel(new RailwayPark()));
+                .Returns(new ParkViewModel(GetMock<IViewModelFactory>().Object, new RailwayPark()));
             GetMock<IFillColorsProvider>()
                 .Setup(x => x.GetColors())
                 .Returns(fillColors);

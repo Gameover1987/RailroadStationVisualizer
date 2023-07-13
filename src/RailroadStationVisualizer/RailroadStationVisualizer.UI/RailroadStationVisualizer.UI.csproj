@@ -6,8 +6,4 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\RailroadStationVisualizer.Model\RailroadStationVisualizer.Model.csproj" />
-  </ItemGroup>
-
 </Project>

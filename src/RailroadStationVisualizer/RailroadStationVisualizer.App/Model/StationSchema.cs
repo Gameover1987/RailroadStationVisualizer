@@ -1,4 +1,4 @@
-namespace RailroadStationVisualizer.Model
+namespace RailroadStationVisualizer.App.Model
 {
     /// <summary>
     /// Схема ЖД станции

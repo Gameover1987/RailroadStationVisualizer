@@ -7,10 +7,11 @@
         xmlns:viewModels="clr-namespace:RailroadStationVisualizer.App.ViewModels"
         xmlns:helpers="clr-namespace:RailroadStationVisualizer.UI.Helpers;assembly=RailroadStationVisualizer.UI"
         xmlns:designMock="clr-namespace:RailroadStationVisualizer.App.Views.DesignMock"
+        xmlns:controls="clr-namespace:RailroadStationVisualizer.App.Views.Controls"
         mc:Ignorable="d"
         Title="{Binding Title}"
         MinHeight="450"
-        Height="800"
+        Height="550"
         MinWidth="800"
         Width="1000"
         WindowStartupLocation="CenterScreen"
@@ -32,8 +33,10 @@
                           SelectedItem="{Binding SelectedPark}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate DataType="{x:Type viewModels:ParkViewModel}">
-                            <TextBlock Text="{Binding Name}" Height="28" TextTrimming="CharacterEllipsis" Margin="0,3,0,0"
-                                       helpers:TextBlockToolTipHelper.ShowTooltipWhenTrimming="True"/>
+                            <Grid Height="28">
+                                <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" Margin="0,3,0,0" 
+                                           helpers:TextBlockToolTipHelper.ShowTooltipWhenTrimming="True"/>
+                            </Grid>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
@@ -63,5 +66,8 @@
                 </ComboBox>
             </StackPanel>
         </StackPanel>
+
+        <controls:RailroadStationVisualizerControl Grid.Row="1" Margin="0,12,0,0"
+                                                   Parks="{Binding Parks}"/>
     </Grid>
 </Window>
