@@ -55,7 +55,7 @@ namespace RailroadStationVisualizer.Tests
         private StationSchema GetStationSchema() {
             return new StationSchema {
                 StationName = "Кукуево",
-                Parks = railwayParks
+                //Parks = railwayParks
             };
         }
     }

@@ -7,10 +7,19 @@ namespace RailroadStationVisualizer.App.Model
     /// </summary>
     public class RailwaySection
     {
-        public Point Start { get; set; }
+        public RailwaySection(int id, RailwayPoint start, RailwayPoint end, string name = "") {
+            Id = id;
+            Start = start;
+            End = end;
+            Name = name;
+        }
 
-        public Point End { get; set; }
+        public int Id { get; }
 
-        public string Name { get; set; }
+        public RailwayPoint Start { get; }
+
+        public RailwayPoint End { get; }
+
+        public string Name { get; }
     }
 }

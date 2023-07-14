@@ -11,8 +11,8 @@ namespace RailroadStationVisualizer.App.Model
         public string StationName { get; set; }
 
         /// <summary>
-        /// Список парков ЖД станции
+        /// Список участков ЖД станции
         /// </summary>
-        public RailwayPark[] Parks { get; set; }
+        public RailwaySection[] Sections { get; set; }
     }
 }

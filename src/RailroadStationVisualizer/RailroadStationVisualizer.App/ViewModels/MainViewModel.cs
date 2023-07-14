@@ -37,6 +37,8 @@ namespace RailroadStationVisualizer.App.ViewModels
             }
         }
 
+        public ObservableCollection<IRailwaySectionViewModel> Sections { get; } = new ObservableCollection<IRailwaySectionViewModel>();
+
         public ObservableCollection<ColorViewModel> FillColors { get; } = new ObservableCollection<ColorViewModel>();
 
         public ColorViewModel SelectedColor {
@@ -54,13 +56,11 @@ namespace RailroadStationVisualizer.App.ViewModels
 
             Title = $"Схема ЖД станции «{schema.StationName}»";
 
-            Parks.Clear();
-            foreach (var railwayPark in schema.Parks) {
-                var parkViewModel = viewModelFactory.CreateParkViewModel(railwayPark);
-                Parks.Add(parkViewModel);
+            Sections.Clear();
+            foreach (var railwaySection in schema.Sections) {
+                var sectionViewModel = viewModelFactory.CreateSectionViewModel(railwaySection);
+                Sections.Add(sectionViewModel);
             }
-
-            SelectedPark = Parks.FirstOrDefault();
 
             FillColors.Clear();
             var colors = fillColorsProvider.GetColors();

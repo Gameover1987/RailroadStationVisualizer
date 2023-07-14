@@ -6,27 +6,25 @@ namespace RailroadStationVisualizer.App.ViewModels
 {
     public interface IRailwaySectionViewModel
     {
-        Point Start { get; set; }
-
-        Point End { get; set; }
-
-        string Name { get; set; }
+       
     }
 
     public class RailwaySectionViewModel : IRailwaySectionViewModel
     {
+        private readonly RailwaySection section;
+
         public RailwaySectionViewModel(RailwaySection section) {
             if (section == null) {
                 throw new ArgumentNullException(nameof(section));
             }
 
-            Start = section.Start;
-            End = section.End;
-            Name = section.Name;
+            this.section = section;
         }
 
-        public Point Start { get; set; }
-        public Point End { get; set; }
-        public string Name { get; set; }
+        public RailwayPoint Start => section.Start;
+
+        public RailwayPoint End => section.End;
+
+        public string Name => section.Name;
     }
 }

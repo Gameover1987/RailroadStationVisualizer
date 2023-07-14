@@ -68,6 +68,6 @@
         </StackPanel>
 
         <controls:RailroadStationVisualizerControl Grid.Row="1" Margin="0,12,0,0"
-                                                   Parks="{Binding Parks}"/>
+                                                   Sections="{Binding Sections}"/>
     </Grid>
 </Window>
