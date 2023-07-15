@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace RailroadStationVisualizer.App.Model
@@ -13,6 +14,7 @@ namespace RailroadStationVisualizer.App.Model
             X = x;
             Y = y;
             Name = name;
+            Sections = new List<RailwaySection>();
         }
 
         public int Id { get; }
@@ -22,8 +24,11 @@ namespace RailroadStationVisualizer.App.Model
         public double Y { get; }
 
         public string Name { get; }
+        
+        public List<RailwaySection> Sections { get; }
 
-        // TODO: подумать
-        public RailwaySection[] Sections { get; set; }
+        public override string ToString() {
+            return $"X = {X}, Y = {Y}";
+        }
     }
 }
