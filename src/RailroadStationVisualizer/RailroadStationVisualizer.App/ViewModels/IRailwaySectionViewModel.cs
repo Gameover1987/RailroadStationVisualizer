@@ -6,7 +6,11 @@ namespace RailroadStationVisualizer.App.ViewModels
 {
     public interface IRailwaySectionViewModel
     {
-       
+       string Park { get; }
+
+       RailwayPoint Start { get; }
+
+       RailwayPoint End { get; }
     }
 
     public class RailwaySectionViewModel : IRailwaySectionViewModel
@@ -20,6 +24,8 @@ namespace RailroadStationVisualizer.App.ViewModels
 
             this.section = section;
         }
+
+        public string Park => section.Track.Park;
 
         public RailwayPoint Start => section.Start;
 

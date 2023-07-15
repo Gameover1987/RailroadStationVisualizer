@@ -7,11 +7,16 @@ namespace RailroadStationVisualizer.App.Model
     /// </summary>
     public class RailwayTrack
     {
-        public RailwayTrack() {
-            Sections = new RailwaySection[0];
+        public RailwayTrack(RailwaySection[] sections, string park = "") {
+            Sections = sections;
+            foreach (var section in sections) {
+                section.Track = this;
+            }
+
+            Park = park;
         }
 
-        public string Name { get; set; }
+        public string Park { get; set; }
 
         public RailwaySection[] Sections { get; set; }
     }

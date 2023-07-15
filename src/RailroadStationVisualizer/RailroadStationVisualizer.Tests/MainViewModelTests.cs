@@ -36,9 +36,6 @@ namespace RailroadStationVisualizer.Tests
             GetMock<IStationSchemaProvider>()
                 .Setup(x => x.GetStationSchema())
                 .Returns(GetStationSchema);
-            GetMock<IViewModelFactory>()
-                .Setup(x => x.CreateParkViewModel(It.IsAny<RailwayPark>()))
-                .Returns(new ParkViewModel(GetMock<IViewModelFactory>().Object, new RailwayPark()));
             GetMock<IFillColorsProvider>()
                 .Setup(x => x.GetColors())
                 .Returns(fillColors);

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows;
 
 namespace RailroadStationVisualizer.App.Model
 {
@@ -26,6 +27,8 @@ namespace RailroadStationVisualizer.App.Model
         public string Name { get; }
         
         public List<RailwaySection> Sections { get; }
+
+        public Point ToPoint() => new Point(X, Y);
 
         public override string ToString() {
             return $"X = {X}, Y = {Y}";

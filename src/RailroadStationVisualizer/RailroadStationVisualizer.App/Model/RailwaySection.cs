@@ -46,5 +46,10 @@ namespace RailroadStationVisualizer.App.Model
         /// Название отрезка
         /// </summary>
         public string Name { get; }
+
+        /// <summary>
+        /// Путь
+        /// </summary>
+        public RailwayTrack Track { get; set; }
     }
 }

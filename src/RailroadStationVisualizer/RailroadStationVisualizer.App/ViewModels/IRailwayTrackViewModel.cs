@@ -4,7 +4,7 @@ namespace RailroadStationVisualizer.App.ViewModels
 {
     public interface IRailwayTrackViewModel
     {
-        string Name { get; }
+        string Park { get; }
 
         ObservableCollection<IRailwaySectionViewModel> Sections { get; }
     }

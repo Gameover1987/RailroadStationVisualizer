@@ -5,14 +5,6 @@ namespace RailroadStationVisualizer.App.ViewModels
 {
     public sealed class ViewModelFactory : IViewModelFactory
     {
-        public IParkViewModel CreateParkViewModel(RailwayPark railwayPark) {
-            if (railwayPark == null) {
-                throw new ArgumentNullException(nameof(railwayPark));
-            }
-
-            return new ParkViewModel(this, railwayPark);
-        }
-
         public IRailwayTrackViewModel CreateTrackViewModel(RailwayTrack railwayTrack) {
             if (railwayTrack == null) {
                 throw new ArgumentNullException(nameof(railwayTrack));

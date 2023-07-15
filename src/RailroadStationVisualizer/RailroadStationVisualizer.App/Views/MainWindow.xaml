@@ -12,8 +12,8 @@
         Title="{Binding Title}"
         MinHeight="450"
         Height="550"
-        MinWidth="800"
-        Width="1000"
+        MinWidth="750"
+        Width="750"
         WindowStartupLocation="CenterScreen"
         Background="{x:Static SystemColors.ControlBrush}"
         d:DataContext="{d:DesignInstance Type={x:Type designMock:DesignMockMainViewModel}, IsDesignTimeCreatable=True}">
@@ -32,9 +32,9 @@
                           VerticalAlignment="Stretch"
                           SelectedItem="{Binding SelectedPark}">
                     <ComboBox.ItemTemplate>
-                        <DataTemplate DataType="{x:Type viewModels:ParkViewModel}">
+                        <DataTemplate>
                             <Grid Height="28">
-                                <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" Margin="0,3,0,0" 
+                                <TextBlock Text="{Binding}" TextTrimming="CharacterEllipsis" Margin="0,3,0,0" 
                                            helpers:TextBlockToolTipHelper.ShowTooltipWhenTrimming="True"/>
                             </Grid>
                         </DataTemplate>
@@ -68,6 +68,8 @@
         </StackPanel>
 
         <controls:RailroadStationVisualizerControl Grid.Row="1" Margin="0,12,0,0"
-                                                   Sections="{Binding Sections}"/>
+                                                   Sections="{Binding Sections}"
+                                                   Park="{Binding SelectedPark}"
+                                                   FillColor="{Binding SelectedColor.Color}"/>
     </Grid>
 </Window>

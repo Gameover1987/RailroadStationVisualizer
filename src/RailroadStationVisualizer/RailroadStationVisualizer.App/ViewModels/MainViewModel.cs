@@ -12,7 +12,7 @@ namespace RailroadStationVisualizer.App.ViewModels
         private readonly IStationSchemaProvider stationSchemaProvider;
         private readonly IViewModelFactory viewModelFactory;
         private readonly IFillColorsProvider fillColorsProvider;
-        private IParkViewModel selectedPark;
+        private string selectedPark;
         private ColorViewModel selectedColor;
 
         public MainViewModel(IStationSchemaProvider stationSchemaProvider,
@@ -25,19 +25,29 @@ namespace RailroadStationVisualizer.App.ViewModels
 
         public string Title { get; private set; }
 
-        public ObservableCollection<IParkViewModel> Parks { get; } = new ObservableCollection<IParkViewModel>();
+        public ObservableCollection<string> Parks { get; } = new ObservableCollection<string>();
 
-        public IParkViewModel SelectedPark {
+        public string SelectedPark {
             get => selectedPark;
             set {
                 if (selectedPark == value)
                     return;
                 selectedPark = value;
                 OnPropertyChanged(() => SelectedPark);
+
+                SelectedSections.Clear();
+                if (selectedPark != null) {
+                    var sectionsByPark = Sections.Where(x => !string.IsNullOrWhiteSpace(x.Park)).ToArray();
+                    foreach (var sectionViewModel in sectionsByPark) {
+                        SelectedSections.Add(sectionViewModel);
+                    }
+                }
             }
         }
 
         public ObservableCollection<IRailwaySectionViewModel> Sections { get; } = new ObservableCollection<IRailwaySectionViewModel>();
+
+        public ObservableCollection<IRailwaySectionViewModel> SelectedSections { get; } = new ObservableCollection<IRailwaySectionViewModel>();
 
         public ObservableCollection<ColorViewModel> FillColors { get; } = new ObservableCollection<ColorViewModel>();
 
@@ -57,9 +67,20 @@ namespace RailroadStationVisualizer.App.ViewModels
             Title = $"Схема ЖД станции «{schema.StationName}»";
 
             Sections.Clear();
-            foreach (var railwaySection in schema.Sections) {
+            var sections = schema.Tracks.SelectMany(x => x.Sections).ToArray();
+            foreach (var railwaySection in sections) {
                 var sectionViewModel = viewModelFactory.CreateSectionViewModel(railwaySection);
                 Sections.Add(sectionViewModel);
+            }
+
+            var parks = schema.Tracks
+                .Where(x => !string.IsNullOrWhiteSpace(x.Park))
+                .Select(x => x.Park)
+                .Distinct()
+                .ToArray();
+            Parks.Clear();
+            foreach (var park in parks) {
+                Parks.Add(park);
             }
 
             FillColors.Clear();
