@@ -24,9 +24,20 @@
                               Y2="{Binding End.Y, Mode=OneWay}"
                               StrokeStartLineCap="Round"
                               StrokeEndLineCap="Round"
-                              Stroke="DarkGray"
-                              StrokeThickness="2"
-                              PreviewMouseLeftButtonUp="StationSchemaElement_MouseLeftButtonUp"/>
+                              PreviewMouseLeftButtonUp="StationSchemaElement_MouseLeftButtonUp">
+                            <Line.Style>
+                                <Style TargetType="{x:Type Line}">
+                                    <Setter Property="StrokeThickness" Value="2"/>
+                                    <Setter Property="Stroke" Value="DarkGray"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding HasPark}" Value="True">
+                                            <Setter Property="Stroke" Value="Blue"/>
+                                            <Setter Property="StrokeThickness" Value="5"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Line.Style>
+                        </Line>
                     </Grid>
                 </DataTemplate>
            </ItemsControl.ItemTemplate>

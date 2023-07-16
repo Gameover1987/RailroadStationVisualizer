@@ -25,7 +25,7 @@ namespace RailroadStationVisualizer.App.Model
         public double Y { get; }
 
         public string Name { get; }
-        
+
         public List<RailwaySection> Sections { get; }
 
         public Point ToPoint() => new Point(X, Y);

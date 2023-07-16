@@ -179,11 +179,11 @@ namespace RailroadStationVisualizer.App.Model
 
             var railwayTrack16 = new RailwayTrack(new[] {
                 new RailwaySection(index++, points[34], points[35]),
-            },park2); 
+            },park2);
 
-            var railwayTrack17 = new RailwayTrack(new[] {
-                new RailwaySection(index++, points[34], points[35]),
-            });
+            //var railwayTrack17 = new RailwayTrack(new[] {
+            //    new RailwaySection(index++, points[34], points[35]),
+            //});
 
             var railwayTrack18 = new RailwayTrack(new[] {
                 new RailwaySection(index++, points[35], points[36]),
@@ -230,7 +230,7 @@ namespace RailroadStationVisualizer.App.Model
                 railwayTrack14,
                 railwayTrack15,
                 railwayTrack16,
-                railwayTrack17,
+                //railwayTrack17,
                 railwayTrack18,
                 railwayTrack19,
                 railwayTrack20,

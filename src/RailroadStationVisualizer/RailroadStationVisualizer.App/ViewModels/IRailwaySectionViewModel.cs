@@ -25,12 +25,14 @@ namespace RailroadStationVisualizer.App.ViewModels
             this.section = section;
         }
 
-        public string Park => section.Track.Park;
+        public string Park => section?.Track?.Park;
 
         public RailwayPoint Start => section.Start;
 
         public RailwayPoint End => section.End;
 
         public string Name => section.Name;
+
+        public bool HasPark => !string.IsNullOrEmpty(Park);
     }
 }
