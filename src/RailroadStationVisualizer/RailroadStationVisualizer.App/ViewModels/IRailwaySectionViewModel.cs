@@ -11,6 +11,8 @@ namespace RailroadStationVisualizer.App.ViewModels
        RailwayPoint Start { get; }
 
        RailwayPoint End { get; }
+
+       RailwaySection ToModel();
     }
 
     public class RailwaySectionViewModel : IRailwaySectionViewModel
@@ -30,6 +32,8 @@ namespace RailroadStationVisualizer.App.ViewModels
         public RailwayPoint Start => section.Start;
 
         public RailwayPoint End => section.End;
+
+        public RailwaySection ToModel() => section;
 
         public string Name => section.Name;
 

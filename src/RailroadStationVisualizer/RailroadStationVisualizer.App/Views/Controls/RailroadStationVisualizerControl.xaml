@@ -4,15 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels="clr-namespace:RailroadStationVisualizer.App.ViewModels"
-             xmlns:controls="clr-namespace:RailroadStationVisualizer.App.Views.Controls"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <ItemsControl x:Name="ItemsControl" 
-                      ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=Sections}">
+        <ItemsControl ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=Sections}">
            <ItemsControl.ItemsPanel>
                <ItemsPanelTemplate>
-                   <Canvas x:Name="canvas" IsItemsHost="True"/>
+                   <Canvas IsItemsHost="True"/>
                </ItemsPanelTemplate>
            </ItemsControl.ItemsPanel>
            <ItemsControl.ItemTemplate>
@@ -31,7 +29,7 @@
                                     <Setter Property="Stroke" Value="DarkGray"/>
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding HasPark}" Value="True">
-                                            <Setter Property="Stroke" Value="Blue"/>
+                                            <Setter Property="Stroke" Value="ForestGreen"/>
                                             <Setter Property="StrokeThickness" Value="5"/>
                                         </DataTrigger>
                                     </Style.Triggers>
