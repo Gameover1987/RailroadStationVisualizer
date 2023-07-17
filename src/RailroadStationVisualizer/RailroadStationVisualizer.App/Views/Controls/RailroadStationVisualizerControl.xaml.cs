@@ -1,3 +1,4 @@
+using Microsoft.Extensions.DependencyInjection;
 using RailroadStationVisualizer.App.ViewModels;
 using RailroadStationVisualizer.App.Views.Helpers;
 using System.Collections.ObjectModel;
@@ -53,7 +54,8 @@ namespace RailroadStationVisualizer.App.Views.Controls
             if (!IsParkRenderingAvailable())
                 return;
 
-            var parkPoints = RailwayParkVisualizer.GetParkPoints(Park, Sections.Select(x => x.ToModel()).ToArray());
+            var parkVisualizer = App.ServiceProvider.GetService<IRailwayParkVisualizer>();
+            var parkPoints = parkVisualizer.GetParkPoints(Park, Sections.Select(x => x.ToModel()).ToArray());
 
             var geometry = new PathGeometry();
             var figure = new PathFigure();

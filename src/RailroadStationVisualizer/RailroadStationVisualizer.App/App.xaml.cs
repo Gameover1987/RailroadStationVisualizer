@@ -3,6 +3,7 @@ using RailroadStationVisualizer.App.Model;
 using RailroadStationVisualizer.App.ViewModels;
 using RailroadStationVisualizer.App.ViewModels.Colors;
 using RailroadStationVisualizer.App.Views;
+using RailroadStationVisualizer.App.Views.Helpers;
 using RailroadStationVisualizer.UI.Commands;
 using System;
 using System.Windows;
@@ -26,10 +27,12 @@ namespace RailroadStationVisualizer.App
             MainWindow.Show();
         }
 
+        public static ServiceProvider ServiceProvider => serviceProvider;
+
         private void MainWindowOnClosed(object sender, EventArgs e) {
             serviceProvider.Dispose();
 
-            App.Current.Shutdown(0);
+            Current.Shutdown(0);
         }
 
         private ServiceProvider RegisterDependencies() {
@@ -39,7 +42,9 @@ namespace RailroadStationVisualizer.App
                 .AddSingleton<IStationSchemaProvider, StationSchemaProvider>()
                 .AddSingleton<IViewModelFactory, ViewModelFactory>()
                 .AddSingleton<IFillColorsProvider, FillColorsProvider>()
+                .AddSingleton<IRailwayParkVisualizer, RailwayParkVisualizer>()
                 .AddSingleton<IMainViewModel, MainViewModel>();
+
 
             return serviceCollection.BuildServiceProvider();
         }

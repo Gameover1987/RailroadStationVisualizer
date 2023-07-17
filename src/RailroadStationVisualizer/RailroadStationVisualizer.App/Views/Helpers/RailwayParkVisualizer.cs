@@ -5,18 +5,20 @@ using System.Linq;
 
 namespace RailroadStationVisualizer.App.Views.Helpers
 {
+    public interface IRailwayParkVisualizer
+    {
+        RailwayPoint[] GetParkPoints(string park, RailwaySection[] sections);
+    }
+
     /// <summary>
     /// Вспомогатльный класс инкапсулирующий в себе логику по построению фигуры для заливки парка
     /// </summary>
-    public static class RailwayParkVisualizer
+    public class RailwayParkVisualizer : IRailwayParkVisualizer
     {
         /// <summary>
         /// Возращает контур в виде коллекции точек из  набора секций для определенного парка
         /// </summary>
-        /// <param name="park"></param>
-        /// <param name="sections"></param>
-        /// <returns></returns>
-        public static RailwayPoint[] GetParkPoints(string park, RailwaySection[] sections) {
+        public RailwayPoint[] GetParkPoints(string park, RailwaySection[] sections) {
             var sectionsByPark = sections.Where(x => x.Track.Park == park).ToArray();
             var parkPoints = sectionsByPark
                 .SelectMany(x => new[] { x.Start, x.End })
