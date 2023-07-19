@@ -46,7 +46,7 @@ namespace RailroadStationVisualizer.App.ViewModels
             }
         }
 
-        public bool IsVisited => section.IsVisisted;
+        public bool IsVisited => section.IsVisited;
 
         public string Name => section.Name;
 

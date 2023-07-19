@@ -52,6 +52,6 @@ namespace RailroadStationVisualizer.App.Model
         /// </summary>
         public RailwayTrack Track { get; set; }
 
-        public bool IsVisisted { get; set; }
+        public bool IsVisited { get; set; }
     }
 }

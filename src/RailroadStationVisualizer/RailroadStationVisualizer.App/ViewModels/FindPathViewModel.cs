@@ -106,7 +106,7 @@ namespace RailroadStationVisualizer.App.ViewModels
 
         private void ResetFindedPath() {
             foreach (var railwaySectionViewModel in Sections.Except(new []{SectionA, SectionB})) {
-                railwaySectionViewModel.Model.IsVisisted = false;
+                railwaySectionViewModel.Model.IsVisited = false;
                 railwaySectionViewModel.IsSelected = false;
                 railwaySectionViewModel.Refresh();
             }
