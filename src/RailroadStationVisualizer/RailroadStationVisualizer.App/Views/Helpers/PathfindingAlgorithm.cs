@@ -1,4 +1,5 @@
 using RailroadStationVisualizer.App.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -97,7 +98,7 @@ namespace RailroadStationVisualizer.App.Views.Helpers
                 }
                 else {
                     Distance = 0;
-                    Ids = new int[0];
+                    Ids = Array.Empty<int>();
                 }
             }
 
