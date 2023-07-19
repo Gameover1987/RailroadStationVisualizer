@@ -1,9 +1,7 @@
 using RailroadStationVisualizer.App.Model;
 using RailroadStationVisualizer.UI.ViewModels;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Windows.Data;
 
 namespace RailroadStationVisualizer.App.ViewModels
 {
@@ -21,22 +19,9 @@ namespace RailroadStationVisualizer.App.ViewModels
             this.viewModelFactory = viewModelFactory;
         }
 
-        private bool FilterSectionsB(object obj) {
-            if (SectionA == null)
-                return true;
-
-            var section = (IRailwaySectionViewModel) obj;
-            return section != SectionA;
-        }
-
-        private bool FilterSectionsA(object obj) {
-            if (SectionB == null)
-                return true;
-
-            var section = (IRailwaySectionViewModel) obj;
-            return section != SectionB;
-        }
-
+        /// <summary>
+        /// Все отрезки всех путей
+        /// </summary>
         public ObservableCollection<IRailwaySectionViewModel> Sections { get; } = new ObservableCollection<IRailwaySectionViewModel>();
 
         /// <summary>

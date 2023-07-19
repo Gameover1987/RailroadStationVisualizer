@@ -21,8 +21,7 @@
                               X2="{Binding End.X, Mode=OneWay}"
                               Y2="{Binding End.Y, Mode=OneWay}"
                               StrokeStartLineCap="Round"
-                              StrokeEndLineCap="Round"
-                              PreviewMouseLeftButtonUp="StationSchemaElement_MouseLeftButtonUp">
+                              StrokeEndLineCap="Round">
                             <Line.Style>
                                 <Style TargetType="{x:Type Line}">
                                     <Setter Property="StrokeThickness" Value="2"/>

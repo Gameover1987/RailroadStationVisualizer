@@ -84,9 +84,5 @@ namespace RailroadStationVisualizer.App.Views.Controls
 
             return true;
         }
-
-        private void StationSchemaElement_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
-           
-        }
     }
 }
