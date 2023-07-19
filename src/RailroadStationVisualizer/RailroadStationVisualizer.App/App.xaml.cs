@@ -45,6 +45,7 @@ namespace RailroadStationVisualizer.App
                 .AddSingleton<IWindowManager, WindowManager>()
                 .AddSingleton<IFillColorsProvider, FillColorsProvider>()
                 .AddSingleton<IRailwayParkVisualizer, RailwayParkVisualizer>()
+                .AddSingleton<IPathfindingAlgorithm, PathfindingAlgorithm>()
                 .AddSingleton<IMainViewModel, MainViewModel>()
                 .AddSingleton<IFindPathViewModel, FindPathViewModel>();
 

@@ -51,5 +51,7 @@ namespace RailroadStationVisualizer.App.Model
         /// Путь
         /// </summary>
         public RailwayTrack Track { get; set; }
+
+        public bool IsVisisted { get; set; }
     }
 }

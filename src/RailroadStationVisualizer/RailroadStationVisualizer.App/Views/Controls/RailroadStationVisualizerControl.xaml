@@ -35,6 +35,11 @@
                                             <Setter Property="Stroke" Value="ForestGreen"/>
                                             <Setter Property="StrokeThickness" Value="5"/>
                                         </MultiDataTrigger>
+
+                                        <DataTrigger Binding="{Binding IsVisited}" Value="True">
+                                            <Setter Property="Stroke" Value="Blue"/>
+                                        </DataTrigger>
+
                                         <DataTrigger Binding="{Binding IsSelected}" Value="True">
                                             <Setter Property="Stroke" Value="ForestGreen"/>
                                             <Setter Property="StrokeThickness" Value="5"/>

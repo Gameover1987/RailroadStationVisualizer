@@ -63,7 +63,7 @@ namespace RailroadStationVisualizer.App.Views.Controls
                 return;
 
             var parkVisualizer = App.ServiceProvider.GetService<IRailwayParkVisualizer>();
-            var parkPoints = parkVisualizer.GetParkPoints(Park, Sections.Select(x => x.ToModel()).ToArray());
+            var parkPoints = parkVisualizer.GetParkPoints(Park, Sections.Select(x => x.Model).ToArray());
 
             var geometry = new PathGeometry();
             var figure = new PathFigure();

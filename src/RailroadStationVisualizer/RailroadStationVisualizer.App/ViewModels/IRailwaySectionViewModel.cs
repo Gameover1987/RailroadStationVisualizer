@@ -5,6 +5,8 @@ namespace RailroadStationVisualizer.App.ViewModels
 {
     public interface IRailwaySectionViewModel
     {
+        int Id { get; }
+
         string Park { get; }
 
         RailwayPoint Start { get; }
@@ -13,8 +15,12 @@ namespace RailroadStationVisualizer.App.ViewModels
 
         string DisplayName { get; }
 
-        RailwaySection ToModel();
+        RailwaySection Model { get; }
 
         bool IsSelected { get; set; }
+
+        bool IsVisited { get; }
+
+        void Refresh();
     }
 }

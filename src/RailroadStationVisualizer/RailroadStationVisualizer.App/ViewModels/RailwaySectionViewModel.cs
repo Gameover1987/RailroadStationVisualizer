@@ -17,6 +17,8 @@ namespace RailroadStationVisualizer.App.ViewModels
             this.section = section;
         }
 
+        public int Id => section.Id;
+
         public string Park => section?.Track?.Park;
 
         public RailwayPoint Start => section.Start;
@@ -32,7 +34,7 @@ namespace RailroadStationVisualizer.App.ViewModels
             }
         }
 
-        public RailwaySection ToModel() => section;
+        public RailwaySection Model => section;
 
         public bool IsSelected {
             get { return isSelected; }
@@ -43,6 +45,8 @@ namespace RailroadStationVisualizer.App.ViewModels
                 OnPropertyChanged(() => IsSelected);
             }
         }
+
+        public bool IsVisited => section.IsVisisted;
 
         public string Name => section.Name;
 

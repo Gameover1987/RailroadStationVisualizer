@@ -1,4 +1,6 @@
 using RailroadStationVisualizer.App.Model;
+using RailroadStationVisualizer.App.Views.Helpers;
+using RailroadStationVisualizer.UI.Commands;
 using RailroadStationVisualizer.UI.ViewModels;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -9,14 +11,20 @@ namespace RailroadStationVisualizer.App.ViewModels
     {
         private readonly IStationSchemaProvider stationSchemaProvider;
         private readonly IViewModelFactory viewModelFactory;
+        private readonly IPathfindingAlgorithm pathfindingAlgorithm;
         private IRailwaySectionViewModel sectionA;
         private IRailwaySectionViewModel sectionB;
 
         private StationSchema schema;
 
-        public FindPathViewModel(IStationSchemaProvider stationSchemaProvider, IViewModelFactory viewModelFactory) {
+        public FindPathViewModel(IStationSchemaProvider stationSchemaProvider,
+            IViewModelFactory viewModelFactory,
+            IPathfindingAlgorithm pathfindingAlgorithm) {
             this.stationSchemaProvider = stationSchemaProvider;
             this.viewModelFactory = viewModelFactory;
+            this.pathfindingAlgorithm = pathfindingAlgorithm;
+
+            PerformPathFindCommand = new DelegateCommand(PerformPathFindCommandHandler, CanPerformPathFindCommandHandler);
         }
 
         /// <summary>
@@ -40,6 +48,8 @@ namespace RailroadStationVisualizer.App.ViewModels
                 if (sectionA != null)
                     sectionA.IsSelected = true;
                 OnPropertyChanged(() => SectionA);
+
+                ResetFindedPath();
             }
         }
 
@@ -59,8 +69,12 @@ namespace RailroadStationVisualizer.App.ViewModels
                 if (sectionB != null)
                     sectionB.IsSelected = true;
                 OnPropertyChanged(() => SectionB);
+
+                ResetFindedPath();
             }
         }
+
+        public IDelegateCommand PerformPathFindCommand { get; }
 
         public void Initialize() {
             schema = stationSchemaProvider.GetStationSchema();
@@ -73,6 +87,28 @@ namespace RailroadStationVisualizer.App.ViewModels
             Sections.Clear();
             foreach (var railwaySectionViewModel in sections) {
                 Sections.Add(railwaySectionViewModel);
+            }
+        }
+
+        private bool CanPerformPathFindCommandHandler() {
+            return SectionA != null && SectionB != null;
+        }
+
+        private void PerformPathFindCommandHandler() {
+            var sections = pathfindingAlgorithm.GetPathBetweenTwoSections(SectionA.Model, SectionB.Model);
+
+            var ids = sections.Select(x => x.Id).ToArray();
+            foreach (var railwaySectionViewModel in Sections) {
+                railwaySectionViewModel.IsSelected = ids.Contains(railwaySectionViewModel.Id);
+                railwaySectionViewModel.Refresh();
+            }
+        }
+
+        private void ResetFindedPath() {
+            foreach (var railwaySectionViewModel in Sections.Except(new []{SectionA, SectionB})) {
+                railwaySectionViewModel.Model.IsVisisted = false;
+                railwaySectionViewModel.IsSelected = false;
+                railwaySectionViewModel.Refresh();
             }
         }
     }

@@ -49,6 +49,8 @@
                           ItemsSource="{Binding Sections}"
                           SelectedItem="{Binding SectionB}"/>
             </StackPanel>
+            <Button Content="Поиск пути" VerticalAlignment="Bottom" Width="100" Margin="0,6,6,6" Height="22"
+                    Command="{Binding PerformPathFindCommand}"/>
         </StackPanel>
 
         <controls:RailroadStationVisualizerControl Grid.Row="1" Margin="0,12,0,0"
