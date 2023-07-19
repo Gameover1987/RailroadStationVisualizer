@@ -1,0 +1,57 @@
+﻿<Window x:Class="RailroadStationVisualizer.App.Views.FindPathWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RailroadStationVisualizer.App.Views"
+        xmlns:helpers="clr-namespace:RailroadStationVisualizer.UI.Helpers;assembly=RailroadStationVisualizer.UI"
+        xmlns:designMock="clr-namespace:RailroadStationVisualizer.App.Views.DesignMock"
+        xmlns:controls="clr-namespace:RailroadStationVisualizer.App.Views.Controls"
+        xmlns:viewModels="clr-namespace:RailroadStationVisualizer.App.ViewModels"
+        mc:Ignorable="d"
+        Title="Поиск пути между двумя участками"
+        MinHeight="450"
+        Height="550"
+        MinWidth="750"
+        Width="750"
+        ShowInTaskbar="False"
+        WindowStartupLocation="CenterScreen"
+        Background="{x:Static SystemColors.ControlBrush}"
+        d:DataContext="{d:DesignInstance Type={x:Type designMock:DesignMockFindPathViewModel}, IsDesignTimeCreatable=True}">
+    <Window.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="RailwaySectionTemplate" DataType="{x:Type viewModels:IRailwaySectionViewModel}">
+                <Grid>
+                    <TextBlock Text="{Binding DisplayName}" TextTrimming="CharacterEllipsis" 
+                               helpers:TextBlockToolTipHelper.ShowTooltipWhenTrimming="True"/>
+                </Grid>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Background="White" HorizontalAlignment="Left" >
+            <StackPanel Orientation="Vertical" Margin="6">
+                <TextBlock Text="Начальный участок"/>
+                <ComboBox Width="150" Margin="0,6,0,0"
+                          ItemTemplate="{StaticResource RailwaySectionTemplate}"
+                          ItemsSource="{Binding Sections}"
+                          SelectedItem="{Binding SectionA}"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="6">
+                <TextBlock Text="Конечный участок"/>
+                <ComboBox Width="150" Margin="0,6,0,0"
+                          ItemTemplate="{StaticResource RailwaySectionTemplate}"
+                          ItemsSource="{Binding Sections}"
+                          SelectedItem="{Binding SectionB}"/>
+            </StackPanel>
+        </StackPanel>
+
+        <controls:RailroadStationVisualizerControl Grid.Row="1" Margin="0,12,0,0"
+                                                   Sections="{Binding Sections}"/>
+    </Grid>
+</Window>

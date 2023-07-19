@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RailroadStationVisualizer.App.ViewModels
 {
-    public interface IMainViewModel
+    public interface IFindPathViewModel
     {
         void Initialize();
     }

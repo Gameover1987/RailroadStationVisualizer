@@ -1,5 +1,7 @@
+using RailroadStationVisualizer.App.Infrastructure;
 using RailroadStationVisualizer.App.Model;
 using RailroadStationVisualizer.App.ViewModels.Colors;
+using RailroadStationVisualizer.UI.Commands;
 using RailroadStationVisualizer.UI.ViewModels;
 using System;
 using System.Collections.ObjectModel;
@@ -12,15 +14,19 @@ namespace RailroadStationVisualizer.App.ViewModels
         private readonly IStationSchemaProvider stationSchemaProvider;
         private readonly IViewModelFactory viewModelFactory;
         private readonly IFillColorsProvider fillColorsProvider;
+        private readonly IWindowManager windowManager;
         private string selectedPark;
         private ColorViewModel selectedColor;
 
         public MainViewModel(IStationSchemaProvider stationSchemaProvider,
             IViewModelFactory viewModelFactory,
-            IFillColorsProvider fillColorsProvider) {
+            IFillColorsProvider fillColorsProvider, 
+            IWindowManager windowManager) {
             this.stationSchemaProvider = stationSchemaProvider ?? throw new ArgumentNullException(nameof(stationSchemaProvider));
             this.viewModelFactory = viewModelFactory ?? throw new ArgumentNullException(nameof(viewModelFactory));
             this.fillColorsProvider = fillColorsProvider ?? throw new ArgumentNullException(nameof(fillColorsProvider));
+            this.windowManager = windowManager;
+            FindWayCommand = new DelegateCommand(FindWayCommandHandler);
         }
 
         public string Title { get; private set; }
@@ -34,20 +40,10 @@ namespace RailroadStationVisualizer.App.ViewModels
                     return;
                 selectedPark = value;
                 OnPropertyChanged(() => SelectedPark);
-
-                SelectedSections.Clear();
-                if (selectedPark != null) {
-                    var sectionsByPark = Sections.Where(x => !string.IsNullOrWhiteSpace(x.Park)).ToArray();
-                    foreach (var sectionViewModel in sectionsByPark) {
-                        SelectedSections.Add(sectionViewModel);
-                    }
-                }
             }
         }
 
         public ObservableCollection<IRailwaySectionViewModel> Sections { get; } = new ObservableCollection<IRailwaySectionViewModel>();
-
-        public ObservableCollection<IRailwaySectionViewModel> SelectedSections { get; } = new ObservableCollection<IRailwaySectionViewModel>();
 
         public ObservableCollection<ColorViewModel> FillColors { get; } = new ObservableCollection<ColorViewModel>();
 
@@ -60,6 +56,8 @@ namespace RailroadStationVisualizer.App.ViewModels
                 OnPropertyChanged(() => SelectedColor);
             }
         }
+
+        public IDelegateCommand FindWayCommand { get; }
 
         public void Initialize() {
             var schema = stationSchemaProvider.GetStationSchema();
@@ -90,6 +88,10 @@ namespace RailroadStationVisualizer.App.ViewModels
             }
 
             OnPropertyChanged();
+        }
+
+        private void FindWayCommandHandler() {
+           windowManager.ShowFindPathWindow();
         }
     }
 }

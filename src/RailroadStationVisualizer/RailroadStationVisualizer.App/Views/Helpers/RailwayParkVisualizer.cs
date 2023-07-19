@@ -5,11 +5,6 @@ using System.Linq;
 
 namespace RailroadStationVisualizer.App.Views.Helpers
 {
-    public interface IRailwayParkVisualizer
-    {
-        RailwayPoint[] GetParkPoints(string park, RailwaySection[] sections);
-    }
-
     /// <summary>
     /// Вспомогатльный класс инкапсулирующий в себе логику по построению фигуры для заливки парка
     /// </summary>

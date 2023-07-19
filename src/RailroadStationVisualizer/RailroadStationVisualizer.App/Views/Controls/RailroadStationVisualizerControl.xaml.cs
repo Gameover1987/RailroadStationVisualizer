@@ -23,10 +23,8 @@ namespace RailroadStationVisualizer.App.Views.Controls
         public static readonly DependencyProperty FillColorProperty = DependencyProperty.Register(
             "FillColor", typeof(Color), typeof(RailroadStationVisualizerControl), new FrameworkPropertyMetadata(default(Color)) { AffectsRender = true });
 
-        public Color FillColor {
-            get => (Color) GetValue(FillColorProperty);
-            set => SetValue(FillColorProperty, value);
-        }
+        public static readonly DependencyProperty HighlightSectionsInParkProperty = DependencyProperty.Register(
+            "HighlightSectionsInPark", typeof(bool), typeof(RailroadStationVisualizerControl), new PropertyMetadata(default(bool)));
 
         public RailroadStationVisualizerControl() {
             InitializeComponent();
@@ -46,6 +44,16 @@ namespace RailroadStationVisualizer.App.Views.Controls
         public string Park {
             get => (string) GetValue(ParkProperty);
             set => SetValue(ParkProperty, value);
+        }
+
+        public Color FillColor {
+            get => (Color) GetValue(FillColorProperty);
+            set => SetValue(FillColorProperty, value);
+        }
+
+        public bool HighlightSectionsInPark {
+            get { return (bool) GetValue(HighlightSectionsInParkProperty); }
+            set { SetValue(HighlightSectionsInParkProperty, value); }
         }
 
         protected override void OnRender(DrawingContext drawingContext) {

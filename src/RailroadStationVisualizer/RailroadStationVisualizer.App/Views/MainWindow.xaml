@@ -28,8 +28,6 @@
                 <TextBlock Text="Парк"/>
                 <ComboBox Width="100" Height="28" Margin="0,6,0,0"
                           ItemsSource="{Binding Parks}"
-                          HorizontalAlignment="Stretch"
-                          VerticalAlignment="Stretch"
                           SelectedItem="{Binding SelectedPark}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
@@ -65,11 +63,15 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
             </StackPanel>
+
+            <Button Content="Поиск пути" VerticalAlignment="Bottom" Width="100" Margin="0,6,6,6" Height="28"
+                    Command="{Binding FindWayCommand}"/>
         </StackPanel>
 
         <controls:RailroadStationVisualizerControl Grid.Row="1" Margin="0,12,0,0"
                                                    Sections="{Binding Sections}"
                                                    Park="{Binding SelectedPark}"
-                                                   FillColor="{Binding SelectedColor.Color}"/>
+                                                   FillColor="{Binding SelectedColor.Color}"
+                                                   HighlightSectionsInPark="True"/>
     </Grid>
 </Window>
