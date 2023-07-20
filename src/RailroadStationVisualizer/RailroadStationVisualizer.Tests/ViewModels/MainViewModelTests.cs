@@ -1,18 +1,21 @@
 using Moq;
 using NUnit.Framework;
+using RailroadStationVisualizer.App.Infrastructure;
 using RailroadStationVisualizer.App.Model;
 using RailroadStationVisualizer.App.ViewModels;
 using RailroadStationVisualizer.App.ViewModels.Colors;
 using RailroadStationVisualizer.Tests.Utils;
-using System.Linq;
 
-namespace RailroadStationVisualizer.Tests
+namespace RailroadStationVisualizer.Tests.ViewModels
 {
+    /// <summary>
+    /// Тесты для <see cref="MainViewModel">MainViewModel</see>
+    /// </summary>
     [TestFixture]
     public class MainViewModelTests : AutoMockerTestsBase<MainViewModel>
     {
         private readonly string[] railwayParks = new[] {
-            "Парк 1","Парк 2" 
+            "Парк 1","Парк 2"
         };
 
         private readonly ColorViewModel[] fillColors = new ColorViewModel[] {
@@ -37,7 +40,7 @@ namespace RailroadStationVisualizer.Tests
             GetMock<IFillColorsProvider>()
                 .Setup(x => x.GetColors())
                 .Returns(fillColors);
-        
+
             // When
             Target.Initialize();
 
@@ -45,6 +48,20 @@ namespace RailroadStationVisualizer.Tests
             Assert.AreEqual("Схема ЖД станции «Кукуево»", Target.Title);
             Assert.AreEqual(railwayParks.Length, Target.Parks.Count);
             Assert.AreEqual(fillColors.Length, Target.FillColors.Count);
+        }
+
+        /// <summary>
+        /// Должен вызвать метод отображения окна с поиском пути при выполнении соответствующей команды
+        /// </summary>
+        [Test]
+        public void ShouldShowFindPathWindowWhenExecAppropriateCommand() {
+            // Given
+
+            // When
+            Target.FindWayCommand.TryExecute();
+
+            // Then
+            GetMock<IWindowManager>().Verify(x => x.ShowFindPathWindow(), Times.Once);
         }
 
         private StationSchema GetStationSchema() {
@@ -57,7 +74,7 @@ namespace RailroadStationVisualizer.Tests
 
             return new StationSchema {
                 StationName = "Кукуево",
-                Tracks = new []{
+                Tracks = new[]{
                     new RailwayTrack(new[] {
                         new RailwaySection(1, point1, point2),
                         new RailwaySection(2, point2, point3),

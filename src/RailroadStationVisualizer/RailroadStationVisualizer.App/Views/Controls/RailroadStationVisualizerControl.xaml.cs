@@ -51,8 +51,8 @@ namespace RailroadStationVisualizer.App.Views.Controls
         }
 
         public bool HighlightSectionsInPark {
-            get { return (bool) GetValue(HighlightSectionsInParkProperty); }
-            set { SetValue(HighlightSectionsInParkProperty, value); }
+            get => (bool) GetValue(HighlightSectionsInParkProperty);
+            set => SetValue(HighlightSectionsInParkProperty, value);
         }
 
         protected override void OnRender(DrawingContext drawingContext) {

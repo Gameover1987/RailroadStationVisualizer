@@ -9,7 +9,17 @@ namespace RailroadStationVisualizer.App.Model.Algorithms
     /// </summary>
     public class DijkstraPathFinder : IPathFinder
     {
+        /// <summary>
+        /// Возвращает набор участков кратчайшего пути между двумя отрезками
+        /// </summary>
+        /// <param name="beginSection">Начальный отрезок</param>
+        /// <param name="endSection">Конечный отрезок</param>
+        /// <returns></returns>
         public RailwaySection[] GetPathBetweenTwoSections(RailwaySection beginSection, RailwaySection endSection) {
+
+            if (beginSection == endSection) {
+                return Array.Empty<RailwaySection>();
+            }
 
             var firstPathElement = new PathElement(beginSection, null);
             var queue = new Queue<PathElement>(new[] { firstPathElement });
@@ -75,6 +85,9 @@ namespace RailroadStationVisualizer.App.Model.Algorithms
             return connectedSections.ToArray();
         }
 
+        /// <summary>
+        /// Отрезок найденного пути
+        /// </summary>
         private class PathElement
         {
             public PathElement(RailwaySection section, PathElement? previous) {
@@ -99,14 +112,31 @@ namespace RailroadStationVisualizer.App.Model.Algorithms
                 }
             }
 
+            /// <summary>
+            /// Точка из которой пришли
+            /// </summary>
             public int? FromPointId { get; }
 
+            /// <summary>
+            /// Отрезок их которого пришли
+            /// </summary>
             public RailwaySection Section { get; }
 
+            /// <summary>
+            /// Предыдущий отрезко пути
+            /// </summary>
             public PathElement? Previous { get; }
 
+            /// <summary>
+            /// Длина отрезка, включает длину отрезков которые прошли
+            /// </summary>
             public double Distance { get; }
 
+            /// <summary>
+            /// Проверка элемента на то посетили мы его или нет
+            /// </summary>
+            /// <param name="id"></param>
+            /// <returns></returns>
             public bool IsCircleCheck(int id) {
                 if (Previous == null) {
                     return false;

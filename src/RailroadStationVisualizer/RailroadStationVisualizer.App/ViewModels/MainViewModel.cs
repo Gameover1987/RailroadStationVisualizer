@@ -9,14 +9,18 @@ using System.Linq;
 
 namespace RailroadStationVisualizer.App.ViewModels
 {
+    /// <summary>
+    /// ViewModel главного окна
+    /// </summary>
     public class MainViewModel : ViewModelBase, IMainViewModel
     {
         private readonly IStationSchemaProvider stationSchemaProvider;
         private readonly IViewModelFactory viewModelFactory;
         private readonly IFillColorsProvider fillColorsProvider;
         private readonly IWindowManager windowManager;
-        private string selectedPark;
-        private ColorViewModel selectedColor;
+
+        private string? selectedPark;
+        private ColorViewModel? selectedColor;
 
         public MainViewModel(IStationSchemaProvider stationSchemaProvider,
             IViewModelFactory viewModelFactory,
@@ -26,39 +30,68 @@ namespace RailroadStationVisualizer.App.ViewModels
             this.viewModelFactory = viewModelFactory ?? throw new ArgumentNullException(nameof(viewModelFactory));
             this.fillColorsProvider = fillColorsProvider ?? throw new ArgumentNullException(nameof(fillColorsProvider));
             this.windowManager = windowManager;
+
             FindWayCommand = new DelegateCommand(FindWayCommandHandler);
         }
 
-        public string Title { get; private set; }
+        /// <summary>
+        /// Заголовок окна
+        /// </summary>
+        public string? Title { get; private set; }
 
+        /// <summary>
+        /// Коллекция парков
+        /// </summary>
         public ObservableCollection<string> Parks { get; } = new ObservableCollection<string>();
 
+        /// <summary>
+        /// Выбранный парк
+        /// </summary>
         public string SelectedPark {
             get => selectedPark;
             set {
-                if (selectedPark == value)
+                if (selectedPark == value) {
                     return;
+                }
+
                 selectedPark = value;
                 OnPropertyChanged(() => SelectedPark);
             }
         }
 
+        /// <summary>
+        /// Коллекция отрезков ЖД путей (так называемых секций) 
+        /// </summary>
         public ObservableCollection<IRailwaySectionViewModel> Sections { get; } = new ObservableCollection<IRailwaySectionViewModel>();
 
+        /// <summary>
+        /// Коллекция цветов для заливки
+        /// </summary>
         public ObservableCollection<ColorViewModel> FillColors { get; } = new ObservableCollection<ColorViewModel>();
 
-        public ColorViewModel SelectedColor {
+        /// <summary>
+        /// Выбранный цвет для заливки
+        /// </summary>
+        public ColorViewModel? SelectedColor {
             get => selectedColor;
             set {
-                if (selectedColor == value)
+                if (selectedColor == value) {
                     return;
+                }
+
                 selectedColor = value;
                 OnPropertyChanged(() => SelectedColor);
             }
         }
 
+        /// <summary>
+        /// Команда для открытия окна поиска пути
+        /// </summary>
         public IDelegateCommand FindWayCommand { get; }
 
+        /// <summary>
+        /// Инициализирует модель представления загружая в нее схему станции
+        /// </summary>
         public void Initialize() {
             var schema = stationSchemaProvider.GetStationSchema();
 

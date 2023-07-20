@@ -119,7 +119,7 @@ namespace RailroadStationVisualizer.App.Model.Algorithms
                 resultPoints.Add(nextPoint);
             }
 
-            return resultPoints.ToArray();
+            return resultPoints.Distinct().ToArray();
         }
     }
 }

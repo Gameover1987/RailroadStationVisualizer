@@ -37,7 +37,7 @@ namespace RailroadStationVisualizer.App.ViewModels
         public RailwaySection Model => section;
 
         public bool IsSelected {
-            get { return isSelected; }
+            get => isSelected;
             set {
                 if (isSelected == value)
                     return;

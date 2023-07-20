@@ -1,5 +1,3 @@
-using RailroadStationVisualizer.App.Model;
-
 namespace RailroadStationVisualizer.App.Model.Algorithms
 {
     /// <summary>
@@ -10,8 +8,8 @@ namespace RailroadStationVisualizer.App.Model.Algorithms
         /// <summary>
         /// Возвращает набор участков кратчайшего пути между двумя отрезками
         /// </summary>
-        /// <param name="beginSection"></param>
-        /// <param name="endSection"></param>
+        /// <param name="beginSection">Начальный отрезок</param>
+        /// <param name="endSection">Конечный отрезок</param>
         /// <returns></returns>
         RailwaySection[] GetPathBetweenTwoSections(RailwaySection beginSection, RailwaySection endSection);
     }

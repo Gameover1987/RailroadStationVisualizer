@@ -7,15 +7,19 @@ using System.Linq;
 
 namespace RailroadStationVisualizer.App.ViewModels
 {
+    /// <summary>
+    /// ViewModel для поиска пути
+    /// </summary>
     public class FindPathViewModel : ViewModelBase, IFindPathViewModel
     {
         private readonly IStationSchemaProvider stationSchemaProvider;
         private readonly IViewModelFactory viewModelFactory;
         private readonly IPathFinder pathFindingAlgorithm;
-        private IRailwaySectionViewModel sectionA;
-        private IRailwaySectionViewModel sectionB;
 
-        private StationSchema schema;
+        private IRailwaySectionViewModel? sectionA;
+        private IRailwaySectionViewModel? sectionB;
+
+        private StationSchema? schema;
 
         public FindPathViewModel(IStationSchemaProvider stationSchemaProvider,
             IViewModelFactory viewModelFactory,
@@ -35,18 +39,22 @@ namespace RailroadStationVisualizer.App.ViewModels
         /// <summary>
         /// Начальный участок пути
         /// </summary>
-        public IRailwaySectionViewModel SectionA {
-            get { return sectionA; }
+        public IRailwaySectionViewModel? SectionA {
+            get => sectionA;
             set {
-                if (sectionA == value)
+                if (sectionA == value) {
                     return;
-                
-                if (sectionA != null)
+                }
+
+                if (sectionA != null) {
                     sectionA.IsSelected = false;
+                }
 
                 sectionA = value;
-                if (sectionA != null)
+                if (sectionA != null) {
                     sectionA.IsSelected = true;
+                }
+
                 OnPropertyChanged(() => SectionA);
 
                 ResetFindedPath();
@@ -56,26 +64,36 @@ namespace RailroadStationVisualizer.App.ViewModels
         /// <summary>
         /// Конечный участок пути
         /// </summary>
-        public IRailwaySectionViewModel SectionB {
-            get { return sectionB; }
+        public IRailwaySectionViewModel? SectionB {
+            get => sectionB;
             set {
-                if (sectionB == value)
+                if (sectionB == value) {
                     return;
+                }
 
-                if (sectionB != null)
+                if (sectionB != null) {
                     sectionB.IsSelected = false;
+                }
 
                 sectionB = value;
-                if (sectionB != null)
+                if (sectionB != null) {
                     sectionB.IsSelected = true;
+                }
+
                 OnPropertyChanged(() => SectionB);
 
                 ResetFindedPath();
             }
         }
 
+        /// <summary>
+        /// Команда для запуска поиска пути
+        /// </summary>
         public IDelegateCommand PerformPathFindCommand { get; }
 
+        /// <summary>
+        /// Инициализирует модель представления загружая в нее схему станции
+        /// </summary>
         public void Initialize() {
             schema = stationSchemaProvider.GetStationSchema();
 
@@ -91,7 +109,15 @@ namespace RailroadStationVisualizer.App.ViewModels
         }
 
         private bool CanPerformPathFindCommandHandler() {
-            return SectionA != null && SectionB != null;
+            if (SectionA == null) {
+                return false;
+            }
+
+            if (SectionB == null) {
+                return false;
+            }
+
+            return SectionA != SectionB;
         }
 
         private void PerformPathFindCommandHandler() {

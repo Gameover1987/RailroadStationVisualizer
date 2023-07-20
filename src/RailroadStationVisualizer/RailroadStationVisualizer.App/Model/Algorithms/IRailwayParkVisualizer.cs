@@ -1,5 +1,3 @@
-using RailroadStationVisualizer.App.Model;
-
 namespace RailroadStationVisualizer.App.Model.Algorithms
 {
     /// <summary>

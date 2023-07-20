@@ -16,6 +16,7 @@ namespace RailroadStationVisualizer.Tests.Utils
         [SetUp]
         public virtual void SetUp() {
             Mocker = new AutoMocker();
+            _target = null;
         }
 
         /// <summary>
