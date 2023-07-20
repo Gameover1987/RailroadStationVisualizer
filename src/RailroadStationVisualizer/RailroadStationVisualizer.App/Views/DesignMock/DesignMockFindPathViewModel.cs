@@ -7,7 +7,7 @@ namespace RailroadStationVisualizer.App.Views.DesignMock
     internal class DesignMockFindPathViewModel : FindPathViewModel
     {
         public DesignMockFindPathViewModel()
-            : base(new StationSchemaProvider(), new ViewModelFactory(), new DijkstraPathFinder())
+            : base(new StationSchemaProvider(), new ViewModelFactory(), new DijkstraPathFinder(), new DesignMockWindowManager())
         {
             Initialize();
         }

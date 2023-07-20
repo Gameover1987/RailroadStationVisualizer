@@ -7,7 +7,7 @@ namespace RailroadStationVisualizer.App.Views.DesignMock
     internal sealed class DesignMockMainViewModel : MainViewModel
     {
         public DesignMockMainViewModel() 
-            : base(new StationSchemaProvider(), new ViewModelFactory(), new FillColorsProvider(), new DesignMockWindowManager())
+            : base(new StationSchemaProvider(), new ViewModelFactory(), new FillColorsProvider(), new DesignMockWindowManager(), new DesignMockFindPathViewModel())
         {
             Initialize();
         }

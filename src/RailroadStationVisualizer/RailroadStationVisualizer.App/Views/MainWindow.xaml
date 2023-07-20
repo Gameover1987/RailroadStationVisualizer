@@ -25,7 +25,7 @@
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" Background="White" HorizontalAlignment="Left" >
             <StackPanel Orientation="Vertical" Margin="6">
-                <TextBlock Text="Парк"/>
+                <TextBlock Text="{x:Static local:Strings.Caption_Park}"/>
                 <ComboBox Width="100" Height="28" Margin="0,6,0,0"
                           ItemsSource="{Binding Parks}"
                           SelectedItem="{Binding SelectedPark}">
@@ -40,7 +40,7 @@
                 </ComboBox>
             </StackPanel>
             <StackPanel Orientation="Vertical" Margin="6">
-                <TextBlock Text="Цвет заливки"/>
+                <TextBlock Text="{x:Static local:Strings.Caption_FillColor}"/>
                 <ComboBox Width="150" Height="28" Margin="0,6,0,0"
                           ItemsSource="{Binding FillColors}"
                           SelectedItem="{Binding SelectedColor}">
@@ -64,7 +64,7 @@
                 </ComboBox>
             </StackPanel>
 
-            <Button Content="Поиск пути" VerticalAlignment="Bottom" Width="100" Margin="0,6,6,6" Height="28"
+            <Button Content="{x:Static local:Strings.Caption_FindPath}" VerticalAlignment="Bottom" Width="100" Margin="0,6,6,6" Height="28"
                     Command="{Binding FindWayCommand}"/>
         </StackPanel>
 

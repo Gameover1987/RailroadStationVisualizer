@@ -1,9 +1,12 @@
+using RailroadStationVisualizer.App.Infrastructure;
 using RailroadStationVisualizer.App.Model;
 using RailroadStationVisualizer.App.Model.Algorithms;
 using RailroadStationVisualizer.UI.Commands;
 using RailroadStationVisualizer.UI.ViewModels;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
+using System.Windows.Interop;
 
 namespace RailroadStationVisualizer.App.ViewModels
 {
@@ -15,6 +18,7 @@ namespace RailroadStationVisualizer.App.ViewModels
         private readonly IStationSchemaProvider stationSchemaProvider;
         private readonly IViewModelFactory viewModelFactory;
         private readonly IPathFinder pathFindingAlgorithm;
+        private readonly IWindowManager windowManager;
 
         private IRailwaySectionViewModel? sectionA;
         private IRailwaySectionViewModel? sectionB;
@@ -23,10 +27,12 @@ namespace RailroadStationVisualizer.App.ViewModels
 
         public FindPathViewModel(IStationSchemaProvider stationSchemaProvider,
             IViewModelFactory viewModelFactory,
-            IPathFinder pathFindingAlgorithm) {
+            IPathFinder pathFindingAlgorithm,
+            IWindowManager windowManager) {
             this.stationSchemaProvider = stationSchemaProvider;
             this.viewModelFactory = viewModelFactory;
             this.pathFindingAlgorithm = pathFindingAlgorithm;
+            this.windowManager = windowManager;
 
             PerformPathFindCommand = new DelegateCommand(PerformPathFindCommandHandler, CanPerformPathFindCommandHandler);
         }
@@ -122,6 +128,10 @@ namespace RailroadStationVisualizer.App.ViewModels
 
         private void PerformPathFindCommandHandler() {
             var sections = pathFindingAlgorithm.GetPathBetweenTwoSections(SectionA.Model, SectionB.Model);
+            if (sections.Length == 0) {
+                windowManager.ShowMessageBox(Strings.WindowTitle_FindPath, Strings.Msg_NoWay);
+                return;
+            }
 
             var ids = sections.Select(x => x.Id).ToArray();
             foreach (var railwaySectionViewModel in Sections) {

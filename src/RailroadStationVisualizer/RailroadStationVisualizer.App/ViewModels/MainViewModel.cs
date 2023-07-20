@@ -18,6 +18,7 @@ namespace RailroadStationVisualizer.App.ViewModels
         private readonly IViewModelFactory viewModelFactory;
         private readonly IFillColorsProvider fillColorsProvider;
         private readonly IWindowManager windowManager;
+        private readonly IFindPathViewModel findPathViewModel;
 
         private string? selectedPark;
         private ColorViewModel? selectedColor;
@@ -25,11 +26,13 @@ namespace RailroadStationVisualizer.App.ViewModels
         public MainViewModel(IStationSchemaProvider stationSchemaProvider,
             IViewModelFactory viewModelFactory,
             IFillColorsProvider fillColorsProvider, 
-            IWindowManager windowManager) {
+            IWindowManager windowManager,
+            IFindPathViewModel findPathViewModel) {
             this.stationSchemaProvider = stationSchemaProvider ?? throw new ArgumentNullException(nameof(stationSchemaProvider));
             this.viewModelFactory = viewModelFactory ?? throw new ArgumentNullException(nameof(viewModelFactory));
             this.fillColorsProvider = fillColorsProvider ?? throw new ArgumentNullException(nameof(fillColorsProvider));
             this.windowManager = windowManager;
+            this.findPathViewModel = findPathViewModel;
 
             FindWayCommand = new DelegateCommand(FindWayCommandHandler);
         }
@@ -95,7 +98,7 @@ namespace RailroadStationVisualizer.App.ViewModels
         public void Initialize() {
             var schema = stationSchemaProvider.GetStationSchema();
 
-            Title = $"Схема ЖД станции «{schema.StationName}»";
+            Title = string.Format(Strings.WindowTitle_Main, schema.StationName);
 
             Sections.Clear();
             var sections = schema.Tracks.SelectMany(x => x.Sections).ToArray();
@@ -124,7 +127,7 @@ namespace RailroadStationVisualizer.App.ViewModels
         }
 
         private void FindWayCommandHandler() {
-           windowManager.ShowFindPathWindow();
+           windowManager.ShowFindPathWindow(findPathViewModel);
         }
     }
 }

@@ -8,12 +8,13 @@
         xmlns:designMock="clr-namespace:RailroadStationVisualizer.App.Views.DesignMock"
         xmlns:controls="clr-namespace:RailroadStationVisualizer.App.Views.Controls"
         xmlns:viewModels="clr-namespace:RailroadStationVisualizer.App.ViewModels"
+        xmlns:app="clr-namespace:RailroadStationVisualizer.App"
         mc:Ignorable="d"
-        Title="Поиск пути между двумя участками"
+        Title="{x:Static app:Strings.WindowTitle_FindPath}"
         MinHeight="350"
-        Height="350"
-        MinWidth="750"
-        Width="800"
+        Height="450"
+        MinWidth="700"
+        Width="900"
         ShowInTaskbar="False"
         WindowStartupLocation="CenterScreen"
         Background="{x:Static SystemColors.ControlBrush}"
@@ -56,8 +57,8 @@
         <Viewbox Grid.Row="1">
             <controls:RailroadStationVisualizerControl Margin="0,12,0,0"
                                                        Sections="{Binding Sections}"
-                                                       HightlightVisitedSections="True"
-                                                       Width="700" Height="200"/>
+                                                       HightlightVisitedSections="False"
+                                                       Width="700" Height="220"/>
         </Viewbox>
     </Grid>
 </Window>

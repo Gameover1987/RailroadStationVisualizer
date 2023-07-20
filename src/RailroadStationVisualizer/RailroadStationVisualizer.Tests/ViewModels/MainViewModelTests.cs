@@ -61,7 +61,7 @@ namespace RailroadStationVisualizer.Tests.ViewModels
             Target.FindWayCommand.TryExecute();
 
             // Then
-            GetMock<IWindowManager>().Verify(x => x.ShowFindPathWindow(), Times.Once);
+            GetMock<IWindowManager>().Verify(x => x.ShowFindPathWindow(It.IsAny<IFindPathViewModel>()), Times.Once);
         }
 
         private StationSchema GetStationSchema() {
