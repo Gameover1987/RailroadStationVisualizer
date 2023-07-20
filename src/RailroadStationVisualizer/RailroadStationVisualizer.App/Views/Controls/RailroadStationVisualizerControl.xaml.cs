@@ -1,10 +1,9 @@
 using Microsoft.Extensions.DependencyInjection;
+using RailroadStationVisualizer.App.Model.Algorithms;
 using RailroadStationVisualizer.App.ViewModels;
-using RailroadStationVisualizer.App.Views.Helpers;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
-using System.Windows.Input;
 using System.Windows.Media;
 
 namespace RailroadStationVisualizer.App.Views.Controls

@@ -1,9 +1,8 @@
-using RailroadStationVisualizer.App.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RailroadStationVisualizer.App.Views.Helpers
+namespace RailroadStationVisualizer.App.Model.Algorithms
 {
     /// <summary>
     /// Вспомогатльный класс инкапсулирующий в себе логику по построению фигуры для заливки парка

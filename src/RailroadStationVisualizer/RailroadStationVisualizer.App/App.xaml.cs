@@ -1,10 +1,10 @@
 using Microsoft.Extensions.DependencyInjection;
 using RailroadStationVisualizer.App.Infrastructure;
 using RailroadStationVisualizer.App.Model;
+using RailroadStationVisualizer.App.Model.Algorithms;
 using RailroadStationVisualizer.App.ViewModels;
 using RailroadStationVisualizer.App.ViewModels.Colors;
 using RailroadStationVisualizer.App.Views;
-using RailroadStationVisualizer.App.Views.Helpers;
 using RailroadStationVisualizer.UI.Commands;
 using System;
 using System.Windows;
@@ -45,7 +45,7 @@ namespace RailroadStationVisualizer.App
                 .AddSingleton<IWindowManager, WindowManager>()
                 .AddSingleton<IFillColorsProvider, FillColorsProvider>()
                 .AddSingleton<IRailwayParkVisualizer, RailwayParkVisualizer>()
-                .AddSingleton<IPathfindingAlgorithm, PathfindingAlgorithm>()
+                .AddSingleton<IPathFinder, DijkstraPathFinder>()
                 .AddSingleton<IMainViewModel, MainViewModel>()
                 .AddSingleton<IFindPathViewModel, FindPathViewModel>();
 

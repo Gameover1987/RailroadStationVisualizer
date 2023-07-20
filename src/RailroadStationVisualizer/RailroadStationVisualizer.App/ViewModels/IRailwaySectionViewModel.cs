@@ -1,5 +1,4 @@
 using RailroadStationVisualizer.App.Model;
-using System.Windows;
 
 namespace RailroadStationVisualizer.App.ViewModels
 {

@@ -11,10 +11,8 @@ namespace RailroadStationVisualizer.Tests
     [TestFixture]
     public class MainViewModelTests : AutoMockerTestsBase<MainViewModel>
     {
-        private readonly RailwayPark[] railwayParks = new[] {
-            new RailwayPark() { Name = "Парк 1" },
-            new RailwayPark() { Name = "Парк 2" },
-            new RailwayPark() { Name = "Парк 3" }
+        private readonly string[] railwayParks = new[] {
+            "Парк 1","Парк 2" 
         };
 
         private readonly ColorViewModel[] fillColors = new ColorViewModel[] {
@@ -50,9 +48,25 @@ namespace RailroadStationVisualizer.Tests
         }
 
         private StationSchema GetStationSchema() {
+            var point1 = new RailwayPoint(1, 0, 0);
+            var point2 = new RailwayPoint(2, 50, 0);
+            var point3 = new RailwayPoint(3, 100, 0);
+            var point4 = new RailwayPoint(4, 100, 0);
+            var point5 = new RailwayPoint(5, 100, 0);
+            var point6 = new RailwayPoint(6, 100, 0);
+
             return new StationSchema {
                 StationName = "Кукуево",
-                //Parks = railwayParks
+                Tracks = new []{
+                    new RailwayTrack(new[] {
+                        new RailwaySection(1, point1, point2),
+                        new RailwaySection(2, point2, point3),
+                    }, railwayParks[0]),
+                    new RailwayTrack(new[] {
+                        new RailwaySection(3, point4, point5),
+                        new RailwaySection(4, point5, point6),
+                    }, railwayParks[1])
+                }
             };
         }
     }

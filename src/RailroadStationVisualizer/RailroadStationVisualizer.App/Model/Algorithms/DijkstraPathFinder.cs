@@ -1,11 +1,13 @@
-using RailroadStationVisualizer.App.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RailroadStationVisualizer.App.Views.Helpers
+namespace RailroadStationVisualizer.App.Model.Algorithms
 {
-    public class PathfindingAlgorithm : IPathfindingAlgorithm
+    /// <summary>
+    /// Алгоритм поиска пути, с некоторыми оговорками почти что Дейкстра ))
+    /// </summary>
+    public class DijkstraPathFinder : IPathFinder
     {
         public RailwaySection[] GetPathBetweenTwoSections(RailwaySection beginSection, RailwaySection endSection) {
 
@@ -23,8 +25,8 @@ namespace RailroadStationVisualizer.App.Views.Helpers
                     continue;
                 }
 
-                var connectedPathElements = GetLinkedPathElements(currentElement);
-                var endPathElement = connectedPathElements.FirstOrDefault(x => x.Section.Id == endSection.Id);
+                var linkedPathElements = GetLinkedPathElements(currentElement);
+                var endPathElement = linkedPathElements.FirstOrDefault(x => x.Section.Id == endSection.Id);
                 if (endPathElement != null) {
                     if (shortestPath > currentElement.Distance) {
                         shortestPath = currentElement.Distance;
@@ -33,7 +35,7 @@ namespace RailroadStationVisualizer.App.Views.Helpers
                     continue;
                 }
 
-                foreach (var pathElement in connectedPathElements) {
+                foreach (var pathElement in linkedPathElements) {
                     queue.Enqueue(pathElement);
                 }
             }
@@ -97,20 +99,22 @@ namespace RailroadStationVisualizer.App.Views.Helpers
                 }
             }
 
-            public int? FromPointId { get; set; }
+            public int? FromPointId { get; }
 
-            public RailwaySection Section { get; set; }
+            public RailwaySection Section { get; }
 
-            public PathElement? Previous { get; set; }
+            public PathElement? Previous { get; }
 
-            public double Distance { get; set; }
+            public double Distance { get; }
 
             public bool IsCircleCheck(int id) {
-                if (Previous == null) 
+                if (Previous == null) {
                     return false;
+                }
 
-                if (Section.Id == id)
+                if (Section.Id == id) {
                     return true;
+                }
 
                 return Previous.IsCircleCheck(id);
             }

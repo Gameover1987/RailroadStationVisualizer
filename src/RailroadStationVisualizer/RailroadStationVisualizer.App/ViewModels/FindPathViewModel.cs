@@ -1,5 +1,5 @@
 using RailroadStationVisualizer.App.Model;
-using RailroadStationVisualizer.App.Views.Helpers;
+using RailroadStationVisualizer.App.Model.Algorithms;
 using RailroadStationVisualizer.UI.Commands;
 using RailroadStationVisualizer.UI.ViewModels;
 using System.Collections.ObjectModel;
@@ -11,7 +11,7 @@ namespace RailroadStationVisualizer.App.ViewModels
     {
         private readonly IStationSchemaProvider stationSchemaProvider;
         private readonly IViewModelFactory viewModelFactory;
-        private readonly IPathfindingAlgorithm pathfindingAlgorithm;
+        private readonly IPathFinder pathFindingAlgorithm;
         private IRailwaySectionViewModel sectionA;
         private IRailwaySectionViewModel sectionB;
 
@@ -19,10 +19,10 @@ namespace RailroadStationVisualizer.App.ViewModels
 
         public FindPathViewModel(IStationSchemaProvider stationSchemaProvider,
             IViewModelFactory viewModelFactory,
-            IPathfindingAlgorithm pathfindingAlgorithm) {
+            IPathFinder pathFindingAlgorithm) {
             this.stationSchemaProvider = stationSchemaProvider;
             this.viewModelFactory = viewModelFactory;
-            this.pathfindingAlgorithm = pathfindingAlgorithm;
+            this.pathFindingAlgorithm = pathFindingAlgorithm;
 
             PerformPathFindCommand = new DelegateCommand(PerformPathFindCommandHandler, CanPerformPathFindCommandHandler);
         }
@@ -95,7 +95,7 @@ namespace RailroadStationVisualizer.App.ViewModels
         }
 
         private void PerformPathFindCommandHandler() {
-            var sections = pathfindingAlgorithm.GetPathBetweenTwoSections(SectionA.Model, SectionB.Model);
+            var sections = pathFindingAlgorithm.GetPathBetweenTwoSections(SectionA.Model, SectionB.Model);
 
             var ids = sections.Select(x => x.Id).ToArray();
             foreach (var railwaySectionViewModel in Sections) {
