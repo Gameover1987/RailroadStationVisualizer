@@ -62,7 +62,7 @@ namespace RailroadStationVisualizer.App.Model.Algorithms
             }
 
             resultPath.Reverse();
-            return resultPath.Select(x => x.Section).ToArray();
+            return resultPath.Select(x => x.Section).Distinct().ToArray();
         }
 
         private static PathElement[] GetLinkedPathElements(PathElement pathElement) {

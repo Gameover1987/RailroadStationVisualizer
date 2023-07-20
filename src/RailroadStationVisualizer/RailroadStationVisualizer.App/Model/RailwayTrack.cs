@@ -14,8 +14,14 @@ namespace RailroadStationVisualizer.App.Model
             Park = park;
         }
 
+        /// <summary>
+        /// Парк
+        /// </summary>
         public string Park { get; set; }
 
+        /// <summary>
+        /// Набор отрезков составляющих путь
+        /// </summary>
         public RailwaySection[] Sections { get; set; }
     }
 }

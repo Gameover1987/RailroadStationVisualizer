@@ -52,6 +52,9 @@ namespace RailroadStationVisualizer.App.Model
         /// </summary>
         public RailwayTrack Track { get; set; }
 
+        /// <summary>
+        /// Флаг посещаемости (используется для отладки алгоритма поиска пути)
+        /// </summary>
         public bool IsVisited { get; set; }
     }
 }

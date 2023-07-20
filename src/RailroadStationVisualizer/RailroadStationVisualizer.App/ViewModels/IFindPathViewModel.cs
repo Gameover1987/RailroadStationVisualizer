@@ -1,11 +1,13 @@
 namespace RailroadStationVisualizer.App.ViewModels
 {
+    /// <summary>
+    /// ViewModel для поиска пути
+    /// </summary>
     public interface IFindPathViewModel
     {
-        IRailwaySectionViewModel SectionA { get; set; }
-
-        IRailwaySectionViewModel SectionB { get; set; }
-
+        /// <summary>
+        /// Инициализирует модель представления
+        /// </summary>
         void Initialize();
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Threading;
@@ -24,7 +24,7 @@ namespace RailroadStationVisualizer.UI.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
-        ///     Сообщает об изменении значений всех свойств.
+        /// Сообщает об изменении значений всех свойств.
         /// </summary>
         protected void OnPropertyChanged()
         {

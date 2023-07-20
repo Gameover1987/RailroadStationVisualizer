@@ -27,8 +27,9 @@ namespace RailroadStationVisualizer.App.ViewModels
 
         public string DisplayName {
             get {
-                if (string.IsNullOrWhiteSpace(Park))
+                if (string.IsNullOrWhiteSpace(Park)) {
                     return $"ID: {section.Id}";
+                }
 
                 return $"ID: {section.Id} - {Park}";
             }

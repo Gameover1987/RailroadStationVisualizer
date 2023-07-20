@@ -1,6 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using RailroadStationVisualizer.App.Model.Algorithms;
 using RailroadStationVisualizer.App.ViewModels;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -9,7 +10,7 @@ using System.Windows.Media;
 namespace RailroadStationVisualizer.App.Views.Controls
 {
     /// <summary>
-    /// Контрол для визуализации схемы ЖД станции
+    /// Контрол для отображения схемы ЖД станции
     /// </summary>
     public partial class RailroadStationVisualizerControl
     {
@@ -25,6 +26,9 @@ namespace RailroadStationVisualizer.App.Views.Controls
         public static readonly DependencyProperty HighlightSectionsInParkProperty = DependencyProperty.Register(
             "HighlightSectionsInPark", typeof(bool), typeof(RailroadStationVisualizerControl), new PropertyMetadata(default(bool)));
 
+        public static readonly DependencyProperty HightlightVisitedSectionsProperty = DependencyProperty.Register(
+            "HightlightVisitedSections", typeof(bool), typeof(RailroadStationVisualizerControl), new PropertyMetadata(default(bool)));
+
         public RailroadStationVisualizerControl() {
             InitializeComponent();
         }
@@ -32,7 +36,7 @@ namespace RailroadStationVisualizer.App.Views.Controls
         /// <summary>
         /// Отрезки ЖД путей
         /// </summary>
-        public ObservableCollection<IRailwaySectionViewModel> Sections {
+        public ObservableCollection<IRailwaySectionViewModel>? Sections {
             get => (ObservableCollection<IRailwaySectionViewModel>) GetValue(SectionsProperty);
             set => SetValue(SectionsProperty, value);
         }
@@ -40,28 +44,46 @@ namespace RailroadStationVisualizer.App.Views.Controls
         /// <summary>
         /// Выбранный парк
         /// </summary>
-        public string Park {
+        public string? Park {
             get => (string) GetValue(ParkProperty);
             set => SetValue(ParkProperty, value);
         }
 
-        public Color FillColor {
+        /// <summary>
+        /// Цвет для заливки
+        /// </summary>
+        public Color? FillColor {
             get => (Color) GetValue(FillColorProperty);
             set => SetValue(FillColorProperty, value);
         }
 
+        /// <summary>
+        /// Выделять ли цвветом отрезки путей которые принадлежат какому-нибудь парку (для отладки)
+        /// </summary>
         public bool HighlightSectionsInPark {
             get => (bool) GetValue(HighlightSectionsInParkProperty);
             set => SetValue(HighlightSectionsInParkProperty, value);
         }
 
+        /// <summary>
+        /// Выделять ли цветом отрезки затронутые алгоритмом поиска пути
+        /// </summary>
+        public bool HightlightVisitedSections {
+            get => (bool) GetValue(HightlightVisitedSectionsProperty);
+            set => SetValue(HightlightVisitedSectionsProperty, value);
+        }
+
         protected override void OnRender(DrawingContext drawingContext) {
             base.OnRender(drawingContext);
 
-            if (!IsParkRenderingAvailable())
+            if (!IsParkRenderingAvailable()) {
                 return;
+            }
 
             var parkVisualizer = App.ServiceProvider.GetService<IRailwayParkVisualizer>();
+            if (parkVisualizer == null) {
+                throw new ArgumentException("Не найдена реализация для алгоритма заливки");
+            }
             var parkPoints = parkVisualizer.GetParkPoints(Park, Sections.Select(x => x.Model).ToArray());
 
             var geometry = new PathGeometry();
@@ -72,14 +94,15 @@ namespace RailroadStationVisualizer.App.Views.Controls
                 figure.Segments.Add(new LineSegment(railwayPoint.ToPoint(), true));
             }
             geometry.Figures.Add(figure);
-            var brush = new SolidColorBrush(FillColor);
+            var brush = new SolidColorBrush(FillColor.Value);
 
             drawingContext.DrawGeometry(brush, new Pen(brush, 5), geometry);
         }
 
         private bool IsParkRenderingAvailable() {
-            if (Sections == null || Sections.Count == 0 || Park == null || FillColor == null)
+            if (Sections == null || Sections.Count == 0 || Park == null || FillColor == null) {
                 return false;
+            }
 
             return true;
         }

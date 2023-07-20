@@ -8,6 +8,7 @@ namespace RailroadStationVisualizer.Tests.Alogrithms
     /// <summary>
     /// Тесты на заливку <see cref="RailwayParkVisualizer">RailwayParkVisualizer</see>
     /// </summary>
+    [TestFixture]
     public class RailwayParkVisualizerTests
     {
         /// <summary>
@@ -36,7 +37,7 @@ namespace RailroadStationVisualizer.Tests.Alogrithms
             };
 
         private static FillingFigureTestCase GetTestCase1() {
-            var points = new RailwayPoint[]
+            var points = new[]
             {
                 new RailwayPoint(1, 0, 0),
                 new RailwayPoint(2, 100, 0),
@@ -46,7 +47,7 @@ namespace RailroadStationVisualizer.Tests.Alogrithms
                 new RailwayPoint(6, 100, 200),
             };
 
-            var sections = new RailwaySection[]
+            var sections = new[]
             {
                 new RailwaySection(1, points[0], points[1]),
                 new RailwaySection(2, points[2], points[3]),
@@ -65,7 +66,7 @@ namespace RailroadStationVisualizer.Tests.Alogrithms
         }
 
         private static FillingFigureTestCase GetTestCase2() {
-            var points = new RailwayPoint[]
+            var points = new[]
             {
                 new RailwayPoint(1, 50, 0),
                 new RailwayPoint(2, 100, 0),
@@ -78,7 +79,7 @@ namespace RailroadStationVisualizer.Tests.Alogrithms
                 new RailwayPoint(7, 100, 100),
             };
 
-            var sections = new RailwaySection[]
+            var sections = new[]
             {
                 new RailwaySection(1, points[0], points[1]),
                 new RailwaySection(2, points[2], points[3]),

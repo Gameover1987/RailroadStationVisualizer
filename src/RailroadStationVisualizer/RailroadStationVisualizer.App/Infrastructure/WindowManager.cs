@@ -3,6 +3,9 @@ using RailroadStationVisualizer.App.Views;
 
 namespace RailroadStationVisualizer.App.Infrastructure
 {
+    /// <summary>
+    /// Менеджер для управления окнами программы
+    /// </summary>
     public sealed class WindowManager : IWindowManager
     {
         private readonly IFindPathViewModel findPathViewModel;
@@ -11,6 +14,9 @@ namespace RailroadStationVisualizer.App.Infrastructure
             this.findPathViewModel = findPathViewModel;
         }
 
+        /// <summary>
+        /// Показать окно поиска пути между участками
+        /// </summary>
         public void ShowFindPathWindow() {
             var window = new FindPathWindow();
             window.DataContext = findPathViewModel;

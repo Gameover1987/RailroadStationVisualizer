@@ -10,10 +10,10 @@
         xmlns:viewModels="clr-namespace:RailroadStationVisualizer.App.ViewModels"
         mc:Ignorable="d"
         Title="Поиск пути между двумя участками"
-        MinHeight="450"
-        Height="550"
+        MinHeight="350"
+        Height="350"
         MinWidth="750"
-        Width="750"
+        Width="800"
         ShowInTaskbar="False"
         WindowStartupLocation="CenterScreen"
         Background="{x:Static SystemColors.ControlBrush}"
@@ -53,7 +53,11 @@
                     Command="{Binding PerformPathFindCommand}"/>
         </StackPanel>
 
-        <controls:RailroadStationVisualizerControl Grid.Row="1" Margin="0,12,0,0"
-                                                   Sections="{Binding Sections}"/>
+        <Viewbox Grid.Row="1">
+            <controls:RailroadStationVisualizerControl Margin="0,12,0,0"
+                                                       Sections="{Binding Sections}"
+                                                       HightlightVisitedSections="True"
+                                                       Width="700" Height="200"/>
+        </Viewbox>
     </Grid>
 </Window>

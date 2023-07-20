@@ -3,6 +3,9 @@ using System.Collections.ObjectModel;
 
 namespace RailroadStationVisualizer.App.ViewModels
 {
+    /// <summary>
+    /// ViewModel ЖД пути
+    /// </summary>
     public class RailwayTrackViewModel : IRailwayTrackViewModel
     {
         public RailwayTrackViewModel(IViewModelFactory viewModelFactory, RailwayTrack railwayTrack) {
@@ -13,8 +16,14 @@ namespace RailroadStationVisualizer.App.ViewModels
             }
         }
 
+        /// <summary>
+        /// Парк
+        /// </summary>
         public string Park { get; }
 
+        /// <summary>
+        /// Набор отрезков
+        /// </summary>
         public ObservableCollection<IRailwaySectionViewModel> Sections { get; } = new ObservableCollection<IRailwaySectionViewModel>();
     }
 }

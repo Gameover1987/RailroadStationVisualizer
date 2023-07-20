@@ -18,7 +18,7 @@ namespace RailroadStationVisualizer.Tests.ViewModels
             "Парк 1","Парк 2"
         };
 
-        private readonly ColorViewModel[] fillColors = new ColorViewModel[] {
+        private readonly ColorViewModel[] fillColors = new[] {
             new ColorViewModel { Color = System.Windows.Media.Colors.Red, Name = "Красный" },
             new ColorViewModel { Color = System.Windows.Media.Colors.Orange, Name = "Оранжевый" },
             new ColorViewModel { Color = System.Windows.Media.Colors.Yellow, Name = "Желтый" },

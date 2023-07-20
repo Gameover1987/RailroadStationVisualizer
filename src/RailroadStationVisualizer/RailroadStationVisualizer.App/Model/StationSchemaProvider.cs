@@ -3,8 +3,15 @@ using System.Collections.Generic;
 
 namespace RailroadStationVisualizer.App.Model
 {
+    /// <summary>
+    /// Поставщик схемы ЖД станции
+    /// </summary>
     public class StationSchemaProvider : IStationSchemaProvider
     {
+        /// <summary>
+        /// Возвращает схему станции
+        /// </summary>
+        /// <returns></returns>
         public StationSchema GetStationSchema() {
             var points = GetRailwayPoints();
             var tracks = GetRailwayTracks(points);

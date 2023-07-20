@@ -36,9 +36,13 @@
                                             <Setter Property="StrokeThickness" Value="5"/>
                                         </MultiDataTrigger>
 
-                                        <DataTrigger Binding="{Binding IsVisited}" Value="True">
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding IsVisited}" Value="True"/>
+                                                <Condition Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=HightlightVisitedSections}" Value="True"/>
+                                            </MultiDataTrigger.Conditions>
                                             <Setter Property="Stroke" Value="Blue"/>
-                                        </DataTrigger>
+                                        </MultiDataTrigger>
 
                                         <DataTrigger Binding="{Binding IsSelected}" Value="True">
                                             <Setter Property="Stroke" Value="ForestGreen"/>
