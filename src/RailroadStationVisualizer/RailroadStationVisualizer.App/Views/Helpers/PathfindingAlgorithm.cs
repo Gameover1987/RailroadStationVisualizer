@@ -10,39 +10,36 @@ namespace RailroadStationVisualizer.App.Views.Helpers
         public RailwaySection[] GetPathBetweenTwoSections(RailwaySection beginSection, RailwaySection endSection) {
 
             var firstPathElement = new PathElement(beginSection, null);
-            var linkedPathElements = GetLinkedPathElements(firstPathElement);
-            var queue = new Queue<PathElement>(linkedPathElements);
+            var queue = new Queue<PathElement>(new[] { firstPathElement });
+
             var shortestPath = double.MaxValue;
-
-            var dictionary = new Dictionary<int, Element>();
-
-            PathElement shortestPathElement = null;
+            PathElement? shortestPathElement = null;
 
             while (queue.Count > 0) {
+
                 var currentElement = queue.Dequeue();
-
-                if (currentElement.Section.Id == endSection.Id) {
-
-                    // Если нашли путь то запоминаем его длину
-                    if (shortestPath > currentElement.Distance) {
-                        shortestPath = currentElement.Distance;
-                        shortestPathElement = new PathElement(endSection, currentElement);
-                    }
-                    continue;
-                }
 
                 if (currentElement.Distance > shortestPath) {
                     continue;
                 }
 
                 var connectedPathElements = GetLinkedPathElements(currentElement);
+                var endPathElement = connectedPathElements.FirstOrDefault(x => x.Section.Id == endSection.Id);
+                if (endPathElement != null) {
+                    if (shortestPath > currentElement.Distance) {
+                        shortestPath = currentElement.Distance;
+                        shortestPathElement = new PathElement(endSection, endPathElement);
+                    }
+                    continue;
+                }
+
                 foreach (var pathElement in connectedPathElements) {
                     queue.Enqueue(pathElement);
                 }
             }
 
             if (shortestPathElement == null) {
-                return new RailwaySection[0];
+                return Array.Empty<RailwaySection>();
             }
 
             var resultPath = new List<PathElement>();
@@ -61,14 +58,14 @@ namespace RailroadStationVisualizer.App.Views.Helpers
 
             if (pathElement.FromPointId == null || pathElement.FromPointId != pathElement.Section.Start.Id) {
                 var startPathElements = pathElement.Section.Start.Sections
-                    .Where(x => x.Id != pathElement.Section.Id && !pathElement.Ids.Contains(x.Id))
+                    .Where(x => x.Id != pathElement.Section.Id && !pathElement.IsCircleCheck(x.Id))
                     .Select(x => new PathElement(x, pathElement));
                 connectedSections.AddRange(startPathElements);
             }
 
             if (pathElement.FromPointId == null || pathElement.FromPointId != pathElement.Section.End.Id) {
                 var endPathElements = pathElement.Section.End.Sections
-                    .Where(x => x.Id != pathElement.Section.Id && !pathElement.Ids.Contains(x.Id))
+                    .Where(x => x.Id != pathElement.Section.Id && !pathElement.IsCircleCheck(x.Id))
                     .Select(x => new PathElement(x, pathElement));
                 connectedSections.AddRange(endPathElements);
             }
@@ -82,41 +79,41 @@ namespace RailroadStationVisualizer.App.Views.Helpers
                 Section = section;
                 Section.IsVisited = true;
                 Previous = previous;
-                if (previous != null) {
-                    Distance = previous.Distance + previous.Section.Distance;
-                    Ids = previous.Ids.Concat(new[] { section.Id }).ToArray();
-                    var sectionPointIds = new [] { section.Start.Id, section.End.Id };
-                    var previousPoints = new[] { previous.Section.Start.Id, previous.Section.End.Id };
-                    foreach (var sectionPointId in sectionPointIds) {
-                        if (previousPoints.All(x => x != sectionPointId)) {
-                            continue;
-                        }
 
-                        FromPointId = sectionPointId;
-                        break;
-                    }
+                if (previous == null) {
+                    return;
                 }
-                else {
-                    Distance = 0;
-                    Ids = Array.Empty<int>();
+
+                Distance = previous.Distance + previous.Section.Distance;
+                var sectionPointIds = new[] { section.Start.Id, section.End.Id };
+                var previousPoints = new[] { previous.Section.Start.Id, previous.Section.End.Id };
+                foreach (var sectionPointId in sectionPointIds) {
+                    if (previousPoints.All(x => x != sectionPointId)) {
+                        continue;
+                    }
+
+                    FromPointId = sectionPointId;
+                    break;
                 }
             }
 
             public int? FromPointId { get; set; }
-
-            public int[] Ids { get; set; }
 
             public RailwaySection Section { get; set; }
 
             public PathElement? Previous { get; set; }
 
             public double Distance { get; set; }
-        }
 
-        private class Element
-        {
-            public int Id { get; set; }
-            public double Distance { get; set; }
+            public bool IsCircleCheck(int id) {
+                if (Previous == null) 
+                    return false;
+
+                if (Section.Id == id)
+                    return true;
+
+                return Previous.IsCircleCheck(id);
+            }
         }
     }
 }
